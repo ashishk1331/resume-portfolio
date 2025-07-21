@@ -1,4 +1,5 @@
 import { ExternalLink } from "lucide-react";
+import Image from "next/image";
 
 export default function Projects() {
 	return (
@@ -62,8 +63,11 @@ export default function Projects() {
 							href={project.href}
 							className="flex items-center gap-2 hover:underline"
 						>
-							<img
+							<Image
+								alt={project.title}
 								src={project.icon}
+								width={128}
+								height={128}
 								className="size-5 aspect-square rounded"
 							/>
 							<h3 className="font-medium text-lg">{project.title}</h3>

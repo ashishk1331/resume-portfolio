@@ -1,4 +1,5 @@
 import Achievements from "@/components/Achievements";
+import Blogs from "@/components/Blogs";
 import Education from "@/components/Education";
 import Experience from "@/components/Experience";
 import Footer from "@/components/Footer";
@@ -15,6 +16,7 @@ export default function Home() {
 			<Skills />
 			<Education />
 			<Achievements />
+			<Blogs />
 			<Footer />
 		</>
 	);
