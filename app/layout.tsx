@@ -11,7 +11,8 @@ const barlow = Barlow({
 
 export const metadata: Metadata = {
 	title: "Ashish Khare",
-	description: "He remade this portfolio for the seventh time. Still no bitches!",
+	description:
+		"He remade this portfolio for the seventh time. Still no bitches!",
 };
 
 export default function RootLayout({
@@ -21,7 +22,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${barlow.variable} antialiased`}>{children}</body>
+			<body className={`${barlow.variable} antialiased`}>
+				<div className="container mx-auto max-w-4xl my-32 p-4 space-y-8">
+					{children}
+				</div>
+			</body>
 		</html>
 	);
 }

@@ -5,7 +5,7 @@ export default function Introduction() {
 				<h3 className="font-medium text-lg">Ashish Khare</h3>
 			</div>
 			<div className="col-span-full md:col-span-4 flex flex-col items-start gap-1 text-sm [&_a]:hover:underline">
-				<p>Frontend and Machine Learning Engineer</p>
+				<p>Frontend / Machine Learning / Design Engineer</p>
 				<a href="mailto:akstyles211+portfolio@gmail.com">
 					akstyles211@gmail.com
 				</a>

@@ -7,15 +7,15 @@ import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 
 export default function Home() {
-  return (
-    <div className="container mx-auto max-w-4xl my-32 p-4 space-y-8">
-      <Introduction />
-      <Experience />
-      <Projects />
-      <Skills />
-      <Education />
-      <Achievements />
-      <Footer />
-    </div>
-  );
+	return (
+		<>
+			<Introduction />
+			<Experience />
+			<Projects />
+			<Skills />
+			<Education />
+			<Achievements />
+			<Footer />
+		</>
+	);
 }

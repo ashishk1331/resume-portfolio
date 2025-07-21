@@ -26,9 +26,7 @@ export default function Experience() {
 				<div className="flex flex-col items-start gap-2">
 					<div className="flex items-start gap-2">
 						<h3 className="font-medium text-lg">FrontendHire</h3>
-						<h3 className="text-lg text-neutral-400">
-							Design Engineer Intern
-						</h3>
+						<h3 className="text-lg text-neutral-400">Design Engineer Intern</h3>
 					</div>
 					<p>
 						Converted Figma designs to React Native screens and launched a
