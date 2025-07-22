@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm';
 import rehypePrismPlus from 'rehype-prism-plus';
 import Image from "next/image";
 // Import Prism CSS theme
-import 'prismjs/themes/prism-tomorrow.css'; // Dark theme
+import 'prismjs/themes/prism-coy.css'; // Dark theme
 import { HTMLAttributes, ImgHTMLAttributes } from "react";
 
 // Custom Image Component
