@@ -3,6 +3,12 @@ import { Dot } from "lucide-react";
 export default function Experience() {
 	return (
 		<div className="grid grid-cols-6 gap-8 p-2">
+			<div className="col-span-full md:col-span-2 md:text-right flex flex-col">
+				<h3 className="font-medium text-lg">しょくむけいれき</h3>
+			</div>
+			<div className="col-span-full md:col-span-4 flex flex-col items-start gap-1 [&_a]:hover:underline">
+				<p>モバイルアプリやウェブキノウのカイハツ、デザインジッソウ、エーピーアイサイテキカなどにジュウジし、リアクトネイティブ、ネクストジェーエス、ジャンゴをもちいたインターンケイケンをつみました。</p>
+			</div>
 			<div className="col-span-full md:col-span-2 md:text-right">
 				<h3 className="font-medium text-lg">Experience</h3>
 			</div>

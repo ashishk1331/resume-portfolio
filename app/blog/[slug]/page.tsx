@@ -45,10 +45,10 @@ export default async function Blog({
 	const { metadata, content } = blog;
 	return (
 		<>
-			<button className="flex items-center gap-2 mb-12 bg-neutral-100 border border-neutral-200 px-3 py-1 rounded cursor-pointer active:scale-90 transition">
+			<a href="/" className="flex items-center gap-2 mb-12 bg-neutral-100 border border-neutral-200 px-3 py-1 rounded cursor-pointer active:scale-90 transition no-underline w-fit font-normal">
 				<ArrowLeft size={16} />
 				<span>Go Back</span>
-			</button>
+			</a>
 			<h1>{metadata.title}</h1>
 			<span className="flex items-center gap-2">
 				<p>{metadata.author}</p>
