@@ -8,7 +8,9 @@ export default function Introduction() {
 			</div>
 			<div className="col-span-full md:col-span-4 flex flex-col items-start gap-1 [&_a]:hover:underline">
 				<p>フロントエンド開発 / 機械学習 / デザインエンジニア</p>
-				<p>わたしはにじゅうさんさいで、きかいがくしゅうとウェブツールにきょうみがあります。</p>
+				<p>
+					わたしはにじゅうさんさいで、きかいがくしゅうとウェブツールにきょうみがあります。
+				</p>
 			</div>
 			<div className="col-span-full md:col-span-2 md:text-right flex flex-col">
 				<h3 className="font-medium text-lg">Ashish Khare</h3>

@@ -1,6 +1,6 @@
-import { ProjectsItems } from "@/constants/projects";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
+import { ProjectsItems } from "@/constants/projects";
 
 export default function Projects() {
 	return (
@@ -9,7 +9,9 @@ export default function Projects() {
 				<h3 className="font-medium text-lg">プロジェクト</h3>
 			</div>
 			<div className="col-span-full md:col-span-4 flex flex-col items-start gap-1 [&_a]:hover:underline">
-				<p>さまざまなぶんやにわたり、キカイガクシュウ、フロントエンドカイハツ、リアルタイムキノウをそなえたウェブ・モバイルアプリのプロジェクトをはばひろくてがけてきました。</p>
+				<p>
+					さまざまなぶんやにわたり、キカイガクシュウ、フロントエンドカイハツ、リアルタイムキノウをそなえたウェブ・モバイルアプリのプロジェクトをはばひろくてがけてきました。
+				</p>
 			</div>
 			<div className="col-span-full md:col-span-2 md:text-right">
 				<h3 className="font-medium text-lg">Projects</h3>

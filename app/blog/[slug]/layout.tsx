@@ -1,5 +1,5 @@
+import type { PropsWithChildren } from "react";
 import Footer from "@/components/Footer";
-import { type PropsWithChildren } from "react";
 
 export default function BlogLayout({ children }: PropsWithChildren) {
 	return (

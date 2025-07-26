@@ -68,7 +68,9 @@ export default function Achievements() {
 				<h3 className="font-medium text-lg">じっせき</h3>
 			</div>
 			<div className="col-span-full md:col-span-4 flex flex-col items-start gap-1 [&_a]:hover:underline">
-				<p>マシンラーニング、クラウドコンピューティング、APIかいはつ、きょうそうプログラミング、コミュニティかつどうにおいて、たすうのにんていしかくとじっせきをほゆう。</p>
+				<p>
+					マシンラーニング、クラウドコンピューティング、APIかいはつ、きょうそうプログラミング、コミュニティかつどうにおいて、たすうのにんていしかくとじっせきをほゆう。
+				</p>
 			</div>
 			<div className="col-span-full md:col-span-2 md:text-right">
 				<h3 className="font-medium text-lg">Achievements</h3>

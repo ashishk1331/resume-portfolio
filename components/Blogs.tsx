@@ -1,6 +1,6 @@
-import { getPublishedBlogs } from "@/lib/blogUtil";
 import { format } from "date-fns";
 import { ExternalLink } from "lucide-react";
+import { getPublishedBlogs } from "@/lib/blogUtil";
 
 export default function Blogs() {
 	const blogs = getPublishedBlogs();
