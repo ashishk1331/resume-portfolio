@@ -73,7 +73,9 @@ export default function Achievements() {
 				</p>
 			</div>
 			<div className="col-span-full md:col-span-2 md:text-right">
-				<h3 className="font-medium text-lg">Achievements</h3>
+				<a href="#achievements">
+					<h3 className="font-medium text-lg">Achievements</h3>
+				</a>
 			</div>
 			<div className="col-span-full md:col-span-4 flex flex-col items-start gap-2 text-sm [&_a]:hover:underline">
 				{achievements.map(({ href, label }, idx) => (

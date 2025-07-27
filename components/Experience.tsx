@@ -12,7 +12,9 @@ export default function Experience() {
 				</p>
 			</div>
 			<div className="col-span-full md:col-span-2 md:text-right">
-				<h3 className="font-medium text-lg">Experience</h3>
+				<a href="#experience">
+					<h3 className="font-medium text-lg">Experience</h3>
+				</a>
 			</div>
 			<div className="col-span-full md:col-span-4 flex flex-col items-start gap-8 text-sm">
 				<div className="flex flex-col items-start gap-2">

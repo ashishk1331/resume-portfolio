@@ -21,7 +21,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" className="scroll-smooth">
 			<body className={`${barlow.variable} antialiased`}>
 				<div className="container mx-auto max-w-4xl my-32 p-4 space-y-8">
 					{children}

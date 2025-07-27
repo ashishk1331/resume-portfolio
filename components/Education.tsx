@@ -4,7 +4,9 @@ export default function Education() {
 	return (
 		<div className="grid grid-cols-6 gap-8 p-2">
 			<div className="col-span-full md:col-span-2 md:text-right">
-				<h3 className="font-medium text-lg">Education</h3>
+				<a href="#education">
+					<h3 className="font-medium text-lg">Education</h3>
+				</a>
 			</div>
 			<div className="col-span-full md:col-span-4 flex flex-col items-start gap-8 text-sm">
 				<div className="flex flex-col items-start gap-2">

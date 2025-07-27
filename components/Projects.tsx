@@ -21,7 +21,9 @@ export default function Projects() {
 					</p>
 				</div>
 				<div className="col-span-full md:col-span-2 md:text-right">
-					<h3 className="font-medium text-lg">Projects</h3>
+					<a href="#projects">
+						<h3 className="font-medium text-lg">Projects</h3>
+					</a>
 				</div>
 				<div className="col-span-full md:col-span-4 flex flex-col items-start gap-12 text-sm">
 					{ProjectsItems.map((project, i) => (
