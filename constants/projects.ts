@@ -6,6 +6,7 @@ export const ProjectsItems = [
 		stack: "TypeScript, NextJS, Convex",
 		icon: "/logo/altar_logo.svg",
 		href: "https://thealtar.vercel.app/",
+		images: ["/landing/altar/homepage.webp", "/landing/altar/profile.webp", "/landing/altar/settings.webp"],
 	},
 	{
 		title: "Flower GAN",
@@ -14,14 +15,25 @@ export const ProjectsItems = [
 		stack: "Python, PyTorch",
 		icon: "/logo/flower_gan_logo.svg",
 		href: "https://www.kaggle.com/code/ashishk1331/flower-gan",
+		images: [
+			"/landing/flower-gan/flower-gan.gif",
+			"/landing/flower-gan/flower-gan-result.webp",
+			"/landing/flower-gan/flower-gan-loss.webp",
+		],
 	},
 	{
-		title: "VLMs for Android",
+		title: "Wingman - VLMs for Android",
 		date: "Mar 2025",
 		desc: "Made a mobile app to run vision-language models locally with Llama.cpp and FastAPI.",
 		stack: "React Native, FastAPI, Llama.cpp",
 		icon: "/logo/wingman_logo.svg",
 		href: "https://github.com/ashishk1331/smolnlm-android",
+		images: [
+			"/landing/wingman/login.webp",
+			"/landing/wingman/scan.webp",
+			"/landing/wingman/inference.webp",
+			"/landing/wingman/vlm.webp",
+		],
 	},
 	{
 		title: "80 Cereals Dataset",
@@ -30,6 +42,12 @@ export const ProjectsItems = [
 		stack: "Python, Sklearn, Seaborn",
 		icon: "/logo/80_cereal_logo.svg",
 		href: "https://www.kaggle.com/code/ashishk1331/80-cereals",
+		images: [
+			"/landing/80-cereals/cereal.webp",
+			"/landing/80-cereals/heatmap.webp",
+			"/landing/80-cereals/rating-v-calories.webp",
+			"/landing/80-cereals/xgboost-residplot.webp",
+		],
 	},
 	{
 		title: "folder-routing",
@@ -38,6 +56,7 @@ export const ProjectsItems = [
 		stack: "JavaScript, ExpressJS",
 		icon: "/logo/folder_routing_logo.svg",
 		href: "https://github.com/ashishk1331/folder-routing",
+		images: ["/landing/folder-routing-banner.webp"],
 	},
 	{
 		title: "Tetrapack",
@@ -46,5 +65,11 @@ export const ProjectsItems = [
 		stack: "JavaScript, ESBuild, Storybook",
 		icon: "/logo/tetrapack_logo.svg",
 		href: "https://tetra-docs.vercel.app/",
+		images: [
+			"/landing/tetrapack/tetrapack-banner.webp",
+			"/landing/tetrapack/process.webp",
+			"/landing/tetrapack/tetra-paper.webp",
+			"/landing/tetrapack/carbon.webp",
+		],
 	},
 ];

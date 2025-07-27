@@ -15,8 +15,8 @@ export default function About() {
 			<h1>About me</h1>
 
 			<p>
-				Hello! I&apos;m a web designer and developer. I&apos;ve built web-based tooling
-				like{" "}
+				Hello! I&apos;m a web designer and developer. I&apos;ve built web-based
+				tooling like{" "}
 				<a
 					href="https://tetra-docs.vercel.app/"
 					target="_blank"
@@ -118,9 +118,10 @@ export default function About() {
 				>
 					Iris dataset
 				</a>
-				? I&apos;ve used Pandas, NumPy, Seaborn, and Scikit-learn to perform EDA,
-				visualization, and model training on it. Datasets I&apos;ve worked with for{" "}
-				<em>Linear Regression</em> and <em>Classification</em> problems:{" "}
+				? I&apos;ve used Pandas, NumPy, Seaborn, and Scikit-learn to perform
+				EDA, visualization, and model training on it. Datasets I&apos;ve worked
+				with for <em>Linear Regression</em> and <em>Classification</em>{" "}
+				problems:{" "}
 				<a
 					href="https://www.kaggle.com/code/ashishk1331/palmer-penguins"
 					target="_blank"
@@ -278,8 +279,8 @@ export default function About() {
 				. Altar and Commit were great exercises for the mind, as I incorporated
 				React Query for efficient queries, a mini design system for uniform
 				designs across entire application, proper authentication and even
-				animations. Commit is evolving rapidly, and I&apos;m excited to turn it into
-				a full-fledged app soon.
+				animations. Commit is evolving rapidly, and I&apos;m excited to turn it
+				into a full-fledged app soon.
 			</p>
 
 			<p>
@@ -336,22 +337,22 @@ export default function About() {
 			<p>
 				My top 3 albums right now!
 				<br />
-				I&apos;ve spent the last few months listening to &quot;Hurry Up Tomorrow&quot; by The
-				Weeknd, who recently announced that this will be his last album and that
-				he&apos;ll be retiring his stage name. Man! The vocals on &quot;HUT&quot; are
-				angelic—exemplary! Speaking of exemplary, Kendrick Lamar&apos;s growing
-				influence and chance to perform at the Super Bowl halftime show are
-				shining examples of his success.
+				I&apos;ve spent the last few months listening to &quot;Hurry Up
+				Tomorrow&quot; by The Weeknd, who recently announced that this will be
+				his last album and that he&apos;ll be retiring his stage name. Man! The
+				vocals on &quot;HUT&quot; are angelic—exemplary! Speaking of exemplary,
+				Kendrick Lamar&apos;s growing influence and chance to perform at the
+				Super Bowl halftime show are shining examples of his success.
 				<br />
-				&quot;CHROMAKOPIA&quot; is a great album. I spent all of November listening to
-				Tyler. He really put out some great work for us to appreciate. 2024 was
-				packed with great albums and projects.
+				&quot;CHROMAKOPIA&quot; is a great album. I spent all of November
+				listening to Tyler. He really put out some great work for us to
+				appreciate. 2024 was packed with great albums and projects.
 				<br />
-				This year, I&apos;ve also spent most of my time listening to Kanye West. He&apos;s
-				the GOAT, no doubt. &quot;Flashing Lights&quot; has been on repeat since last
-				year. Then, Billie also dropped &quot;Hit Me Hard and Soft,&quot; which was
-				exactly the experience I needed to cure my winter blues. Finneas did a
-				fantastic job with production.
+				This year, I&apos;ve also spent most of my time listening to Kanye West.
+				He&apos;s the GOAT, no doubt. &quot;Flashing Lights&quot; has been on
+				repeat since last year. Then, Billie also dropped &quot;Hit Me Hard and
+				Soft,&quot; which was exactly the experience I needed to cure my winter
+				blues. Finneas did a fantastic job with production.
 			</p>
 		</div>
 	);
