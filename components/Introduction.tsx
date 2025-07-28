@@ -4,15 +4,6 @@ export default function Introduction() {
 	return (
 		<div className="grid grid-cols-6 gap-8 p-2">
 			<div className="col-span-full md:col-span-2 md:text-right flex flex-col">
-				<h3 className="font-medium text-lg">アシシュ カレ</h3>
-			</div>
-			<div className="col-span-full md:col-span-4 flex flex-col items-start gap-1 [&_a]:hover:underline">
-				<p>フロントエンド開発 / 機械学習 / デザインエンジニア</p>
-				<p>
-					わたしはにじゅうさんさいで、きかいがくしゅうとウェブツールにきょうみがあります。
-				</p>
-			</div>
-			<div className="col-span-full md:col-span-2 md:text-right flex flex-col">
 				<a href="#introduction">
 					<h3 className="font-medium text-lg">Ashish Khare</h3>
 				</a>

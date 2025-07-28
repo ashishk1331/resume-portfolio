@@ -12,14 +12,6 @@ export default function Projects() {
 	return (
 		<>
 			<div className="grid grid-cols-6 gap-8 p-2">
-				<div className="col-span-full md:col-span-2 md:text-right flex flex-col">
-					<h3 className="font-medium text-lg">プロジェクト</h3>
-				</div>
-				<div className="col-span-full md:col-span-4 flex flex-col items-start gap-1 [&_a]:hover:underline">
-					<p>
-						さまざまなぶんやにわたり、キカイガクシュウ、フロントエンドカイハツ、リアルタイムキノウをそなえたウェブ・モバイルアプリのプロジェクトをはばひろくてがけてきました。
-					</p>
-				</div>
 				<div className="col-span-full md:col-span-2 md:text-right">
 					<a href="#projects">
 						<h3 className="font-medium text-lg">Projects</h3>
