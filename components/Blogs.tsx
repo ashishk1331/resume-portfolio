@@ -13,14 +13,14 @@ export default function Blogs() {
 					<h3 className="font-medium text-lg">Blogs</h3>
 				</a>
 			</div>
-			<div className="col-span-full md:col-span-4 flex flex-col items-start gap-2 [&_a]:hover:underline">
+			<div className="col-span-full md:col-span-4 flex flex-col items-start [&_a]:hover:underline">
 				{blogs.map((blog) => (
 					<BlogPost key={blog.slug} blog={blog} />
 				))}
 				<Link
 					href="/blog/"
 					rel="noopener noreferrer"
-					className="inline-flex w-full text-center justify-center-safe gap-1 items-center bg-neutral-50 p-2"
+					className="inline-flex w-full text-center justify-center-safe gap-1 items-center bg-neutral-50 p-2 rounded-md"
 				>
 					<span className="inline">View all</span>
 					<ArrowRight

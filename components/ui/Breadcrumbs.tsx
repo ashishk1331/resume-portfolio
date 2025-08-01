@@ -41,5 +41,5 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
 			);
 	}
 
-	return <div className="flex items-center gap-2">{collection}</div>;
+	return <div className="flex flex-wrap items-center gap-2">{collection}</div>;
 }
