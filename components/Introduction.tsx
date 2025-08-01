@@ -9,9 +9,9 @@ export default function Introduction() {
 				</a>
 			</div>
 			<div className="col-span-full md:col-span-4 flex flex-col items-start gap-1 text-sm [&_a]:hover:underline">
-				<p>Frontend / Machine Learning / Design Engineer</p>
-				<a href="mailto:akstyles211+portfolio@gmail.com">
-					akstyles211@gmail.com
+				<p>Full-Stack / Machine Learning / Design Engineer</p>
+				<a href="mailto:ashish.khare3110+portfolio@gmail.com">
+					ashish.khare3110@gmail.com
 				</a>
 				<a href="https://www.linkedin.com/in/ashishk1331/">
 					linkedin.com/in/ashishk1331

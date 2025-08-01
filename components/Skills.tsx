@@ -20,7 +20,7 @@ export default function Skills() {
 					<p>NextJS</p>
 					<p>React Native, Expo</p>
 					<p>NodeJS</p>
-					<p>Git/Github</p>
+					<p>Git</p>
 				</div>
 
 				<div className="flex flex-col items-start">
@@ -28,6 +28,12 @@ export default function Skills() {
 					<p>Figma</p>
 					<p>Sublime Text</p>
 					<p>Postman</p>
+				</div>
+
+				<div className="flex flex-col items-start">
+					<h3 className="font-medium text-lg mb-2">Platforms</h3>
+					<p>GCP</p>
+					<p>Github</p>
 					<p>Kaggle</p>
 				</div>
 			</div>
