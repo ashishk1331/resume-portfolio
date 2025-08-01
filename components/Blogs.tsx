@@ -1,9 +1,10 @@
-import { format } from "date-fns";
-import { ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { getPublishedBlogs } from "@/lib/blogUtil";
+import BlogPost from "./BlogPost";
+import Link from "next/link";
 
 export default function Blogs() {
-	const blogs = getPublishedBlogs();
+	const blogs = getPublishedBlogs().slice(0, 4);
 
 	return (
 		<div className="grid grid-cols-6 gap-8 p-2">
@@ -13,23 +14,20 @@ export default function Blogs() {
 				</a>
 			</div>
 			<div className="col-span-full md:col-span-4 flex flex-col items-start gap-2 [&_a]:hover:underline">
-				{blogs.map(({ title, slug, pubDate }) => (
-					<a
-						key={slug}
-						href={`/blog/${slug}`}
-						rel="noopener noreferrer"
-						className="inline-flex text-left gap-2 items-center"
-					>
-						<span className="inline font-medium">
-							{format(pubDate, "yyyy MM")}
-						</span>
-						<span className="inline">{title}</span>
-						<ExternalLink
-							size={12}
-							className="inline-block align-middle text-neutral-400 ml-1"
-						/>
-					</a>
+				{blogs.map((blog) => (
+					<BlogPost key={blog.slug} blog={blog} />
 				))}
+				<Link
+					href="/blog/"
+					rel="noopener noreferrer"
+					className="inline-flex w-full text-center justify-center-safe gap-1 items-center bg-neutral-50 p-2"
+				>
+					<span className="inline">View all</span>
+					<ArrowRight
+						size={12}
+						className="inline-block align-middle text-neutral-400 ml-1"
+					/>
+				</Link>
 			</div>
 		</div>
 	);

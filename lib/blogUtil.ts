@@ -3,7 +3,7 @@ import path from "node:path";
 import matter from "gray-matter";
 
 // Define your metadata interface
-interface BlogMetadata {
+export interface BlogMetadata {
 	title: string;
 	slug: string;
 	pubDate: string;
@@ -11,6 +11,7 @@ interface BlogMetadata {
 	description: string;
 	author: string;
 	hasAudio?: boolean;
+	banner?: string;
 }
 
 // Method 1: Extract metadata from file system

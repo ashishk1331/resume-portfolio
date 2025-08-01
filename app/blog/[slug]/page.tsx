@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { ArrowLeft, Dot } from "lucide-react";
+import { ArrowLeft, Dot, House } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
@@ -10,6 +10,7 @@ import { getBlogContent } from "@/lib/blogUtil";
 import "prismjs/themes/prism-coy.css"; // Dark theme
 import type { HTMLAttributes, ImgHTMLAttributes } from "react";
 import Link from "next/link";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 // Custom Image Component
 const CustomImage = ({ src, alt }: ImgHTMLAttributes<HTMLImageElement>) => {
@@ -49,9 +50,33 @@ export default async function Blog({
 	const { metadata, content } = blog;
 	return (
 		<>
+			<Breadcrumbs
+				items={[
+					{
+						id: "home",
+						label: (
+							<>
+								<House size={16} className="inline-block align-middle" />
+								<span>Home</span>
+							</>
+						),
+						href: "/",
+					},
+					{
+						id: "blogs",
+						label: <span>Blogs</span>,
+						href: "/blog",
+					},
+					{
+						id: "individual-blog",
+						label: <span>{metadata.title}</span>,
+						href: `/blog/${metadata.slug}`,
+					},
+				]}
+			/>
 			<Link
 				href="/"
-				className="flex items-center gap-2 mb-12 bg-neutral-100 border border-neutral-200 px-3 py-1 rounded cursor-pointer active:scale-90 transition no-underline w-fit font-normal"
+				className="flex items-center gap-2 mb-12 bg-neutral-100 border border-neutral-200 px-3 py-1 rounded cursor-pointer active:scale-90 transition no-underline w-fit font-normal mt-8"
 			>
 				<ArrowLeft size={16} />
 				<span>Go Back</span>

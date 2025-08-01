@@ -6,7 +6,11 @@ export const ProjectsItems = [
 		stack: "TypeScript, NextJS, Convex",
 		icon: "/logo/altar_logo.svg",
 		href: "https://thealtar.vercel.app/",
-		images: ["/landing/altar/homepage.webp", "/landing/altar/profile.webp", "/landing/altar/settings.webp"],
+		images: [
+			"/landing/altar/homepage.webp",
+			"/landing/altar/profile.webp",
+			"/landing/altar/settings.webp",
+		],
 	},
 	{
 		title: "Flower GAN",
