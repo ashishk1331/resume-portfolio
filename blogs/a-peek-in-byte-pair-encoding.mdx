@@ -1,7 +1,7 @@
 ---
 title: A Peek in Byte-Pair Encoding
 slug: a-peek-in-byte-pair-encoding
-pubDate: 2025-07-29
+pubDate: 2025-08-02
 draft: false
 description: Exploring how the data is feed into transformers for better context capturing.
 author: Ashish Khare
@@ -361,15 +361,20 @@ I've created a new tokenizer class named `LLTokenizer` class in the \[3]colab no
 
 ## Further Optimizations
 
-\[2]Paper (Section 5) discusses memoization. 
+The paper \[2] (Section 5) discusses the use of memoization:
 
 > While we are not able to devise a
- polynomial-time scheme, we are able to find an
- exact algorithm that is, in some cases, faster than
- the brute-force technique of enumerating all valid
- merge sequences.
+> polynomial-time scheme, we are able to find an
+> exact algorithm that is, in some cases, faster than
+> the brute-force technique of enumerating all valid
+> merge sequences.
 
-Hence, a challenge for the readers.
+So here's a challenge for the reader.
+
+This implementation is computationally expensive, which is why I’ll skip it for now. However, you’re encouraged to try implementing it yourself.
+
+**How slow is it?**
+It maintains a stack where each item includes a full copy of the token sequence. As you can imagine, this grows quickly in both time and memory, especially with longer inputs or higher merge counts.
 
 ## My take
 
