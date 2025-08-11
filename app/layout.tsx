@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Barlow } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/blocks/Navbar";
 
 const barlow = Barlow({
 	subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" className="scroll-smooth">
 			<body className={`${barlow.variable} antialiased`}>
+				<Navbar />
 				<div className="container mx-auto max-w-4xl my-32 p-4 space-y-8">
 					{children}
 				</div>
