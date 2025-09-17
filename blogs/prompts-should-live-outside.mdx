@@ -11,7 +11,7 @@ banner: ./assets/prompts-should-live-outside/banner.webp
 
 ![banner](./assets/prompts-should-live-outside/banner.webp)
 
-Recently, I’ve been working on an AI wrapper with NextJS and the Google GenAI SDK. For the most part, the entire context text and prompts lived inside the functions, which bloated the function bodies. A file that could have been just 50 lines grew to around 500 lines. 🤯 This pushed me to move all the prompt text into separate files and organize them under a prompts folder. Not only because of the file length, but also it made it difficult to view functions together and identify areas to change.
+Recently, I’ve been working on an AI wrapper with NextJS and the Google GenAI SDK. For the most part, the entire context text and prompts lived inside the functions, which bloated the function bodies. A file that could have been just 50 lines grew to around 500 lines. 🤯 This pushed me to move all the prompt text into separate files and organize them under a `prompts` folder. Not only because of the file length, but also because it became difficult to view functions together and identify areas for change.
 
 ## TL;DR
 
@@ -23,40 +23,39 @@ Recently, I’ve been working on an AI wrapper with NextJS and the Google GenAI 
 
 ## Preachings of Dan Abramov
 
-I'm a believer in the teachings of Dan and want to clarify the mental model of values, i.e.,
+I’m a believer in the teachings of Dan and want to clarify the mental model of values, i.e.,
 
-> As we start building our mental model, one of the first common misconceptions
-> we need to clear up is that values are our code. Instead, we need to think of them
-> separately—our code interacts with values, but values exist in a completely
+> As we start building our mental model, one of the first common misconceptions  
+> we need to clear up is that values are our code. Instead, we need to think of them  
+> separately—our code interacts with values, but values exist in a completely  
 > separate space.
 
-[Quoted from Just Javascript by Dan](https://justjavascript.com/)
+[Quoted from *Just JavaScript* by Dan](https://justjavascript.com/)
 
-I strongly believe that values—here, the prompts being simple text—should exist outside the logic sphere. Just as you place images and other static assets in the public folder, separate from your code files, prompts should also be placed outside the coding files.
+I strongly believe that values—here, the prompts being simple text—should exist outside the logic sphere. Just as you place images and other static assets in the public folder, separate from your code files, prompts should also be placed outside coding files.
 
-Building on this notion, I would like to present few ways of placing your prompts and context files in ways separate them from coding files.
+Building on this notion, I would like to present a few ways of placing your prompts and context files separately from your code.
 
 ## The `clsx` for templating
 
-For this project, I didn't want to introduce any compiler-level intricacies. Instead, I came up with a clever use of template strings and regex, which can be imported as functions and invoked with an object of data to render the template.
+For this project, I didn’t want to introduce any compiler-level intricacies. Instead, I came up with a clever use of template strings and regex, which can be imported as functions and invoked with an object of data to render the template.
 
 Let me jot down the requirements for better understanding. I wanted:
 
-* No object nesting
-* Simple substitution
-* Ability to import templates as callable functions
-* Templates to accept an object of data
+* No object nesting  
+* Simple substitution  
+* Ability to import templates as callable functions  
+* Templates to accept an object of data  
 
-For this section, I would like to thank [goober css](https://goober.rocks/) for introducing me to tagged functions in template strings. Also, credit to the inventor of the `clsx` function, used by shadcn UI components back in the day, when it was a one-liner: `classNames.filter(Boolean).join(' ')`. These two sparked a connection and prompted me to write a small tagged function that can be used with template literals and later return a function.
+For this section, I would like to thank [goober css](https://goober.rocks/) for introducing me to tagged functions in template strings. Also, credit to the inventor of the `clsx` function, used by shadcn UI components back in the day, when it was a one-liner: `classNames.filter(Boolean).join(' ')`. These two sparked a connection and inspired me to write a small tagged function that can be used with template literals and later return a function.
 
-The returned function runs a regex to identify escaped entities, which are then substituted with values. Hence, I created the `pm` function (acronym for prompt-maker). The best part of `pm` is that it returns a function that can be reused multiple times to render the template with different sets of values.
-
+The returned function runs a regex to identify escaped entities, which are then substituted with values. Hence, I created the `pm` function (short for *prompt-maker*). The best part of `pm` is that it returns a function that can be reused multiple times to render the template with different sets of values.
 
 ```js
-function pm([string]){
+function pm([string]) {
   const pattern = /\{\{\s*?\.?([\w\d]+)\s*?\t*?\}\}/g;
   return (context) => {
-    for(let [match, variable] of string.matchAll(pattern)){
+    for (let [match, variable] of string.matchAll(pattern)) {
       string = string.replaceAll(match, context[variable]);
     }
     return string;
@@ -69,9 +68,9 @@ I'm working on {{project}}.
 `;
 
 introductoryPrompt({ 
-	world: "World!", 
-	name: "Ashish", 
-	project: "tilde",
+  world: "World!", 
+  name: "Ashish", 
+  project: "tilde",
 });
 
 /*
@@ -82,15 +81,15 @@ Hello World!, my name is Ashish.
 I'm working on tilde.
 "
 */
-```
+````
 
 This small hack solved the bloated file problem for me.
 
 ## The `.prompt` files and loader
 
-The `pm` function still depends on the JavaScript runtime for the prompt files to be created, which makes it language-dependent. But what if I decided to create a dedicated Go server for handling API requests and logging? All the prompt files would still be needing JavaScript environment.
+The `pm` function still depends on the JavaScript runtime for the prompt files to be created, which makes it language-dependent. But what if I decided to create a dedicated Go server for handling API requests and logging? All the prompt files would still require a JavaScript environment.
 
-A solution would be to save the prompts as simple `txt` files instead. This removes the dependency of prompt files on any specific language. For example, consider the following prompt file:
+A solution would be to save the prompts as simple `.txt` files instead. This removes the dependency of prompt files on any specific language. For example, consider the following prompt file:
 
 ```hbs
 Hello {{world}}, my name is {{name}}.
@@ -145,13 +144,11 @@ console.log(
     project: "tilde",
   }),
 );
-
-
 ```
 
-You can also use full-fledged templating engine to be on the safer side. Or anything in-between that satisfy your curiosity and requirements.
+You can also use a full-fledged templating engine to be on the safer side—or anything in between, depending on your curiosity and requirements.
 
-## Others on shelf options
+## Other options on the shelf
 
 The closest available option is the prompt templates on the [Vertex AI dashboard](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/prompt-templates). However, the website lists several limitations, and they can’t be used with system prompts. The implementation process is stricter, and I’ve only tested them on the dashboard.
 
@@ -159,12 +156,12 @@ I also found [dotprompt by Google](https://github.com/google/dotprompt), which p
 
 There is also [Generative AI Scripting by Microsoft](https://microsoft.github.io/genaiscript/), which again handles the process of calling LLMs for you. Although, the use of the `$` symbol reminded me of jQuery and the magic it once brought.
 
-Most solutions have coupled the behavioral logic with the data itself. Think about it—do SQL tables know what query language they use? Or does HTML code know what a window represents for any browser?
+Most solutions have coupled behavioral logic with the data itself. Think about it—do SQL tables know what query language they use? Or does HTML code know what a window represents for any browser?
 
 ## Conclusion
 
 If there’s one lesson to take away from this post, it’s this: don’t chase shiny things just because they promise an all-in-one solution. Instead, pick the plain Lego pieces and build a working solution yourself. Otherwise, you’ll lose your sanity debugging these black boxes!
 
-Also, as an educated and responsible software engineer, you should employ the principle of `separation of concerns`—keep data, logic, and configuration independent of one another. This not only makes your codebase easier to maintain but also allows you to swap out individual parts without breaking the entire system. By doing so, you gain flexibility, improve testability, and future-proof your architecture against inevitable changes in tools and frameworks.
+Also, as an educated and responsible software engineer, you should employ the principle of *separation of concerns*—keep data, logic, and configuration independent of one another. This not only makes your codebase easier to maintain but also allows you to swap out individual parts without breaking the entire system. By doing so, you gain flexibility, improve testability, and future-proof your architecture against inevitable changes in tools and frameworks.
 
-Plus, I’m still exploring the prompting space and tend to jump into coding faster than doing my research. If you find the perfect solution to this problem, feel free to point it out to me. 🙇
+Plus, I’m still exploring the prompting space and tend to jump into coding faster than doing research. If you find the perfect solution to this problem, feel free to point it out to me. 🙇
