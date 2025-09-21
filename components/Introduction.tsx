@@ -1,4 +1,5 @@
-import { ExternalLink } from "lucide-react";
+import { SocialIcon } from "react-social-icons";
+import { socials } from "@/constants/socials";
 
 export default function Introduction() {
 	return (
@@ -9,25 +10,32 @@ export default function Introduction() {
 				</a>
 			</div>
 			<div className="col-span-full md:col-span-4 flex flex-col items-start gap-1 text-sm [&_a]:hover:underline">
-				<p>Full-Stack / Machine Learning / Design Engineer</p>
-				<a href="mailto:ashish.khare3110+portfolio@gmail.com">
-					ashish.khare3110@gmail.com
-				</a>
-				<a href="https://www.linkedin.com/in/ashishk1331/">
-					linkedin.com/in/ashishk1331
-				</a>
-				<a href="https://github.com/ashishk1331">github.com/ashishk1331</a>
-				<a href="https://www.kaggle.com/ashishk1331">kaggle.com/ashishk1331</a>
-				<a
-					href="/about"
-					className="inline text-left underline decoration-neutral-400"
-				>
-					<span className="inline">Read more</span>
-					<ExternalLink
-						size={12}
-						className="inline-block align-middle text-neutral-400 ml-1"
+				<p>Software Engineer</p>
+				<p>
+					I enjoy building all sorts of things—websites, apps, dev tools,
+					libraries, servers, models, songs, even circuits. I also love chatting
+					about data structures (especially graphs), systems, design, video
+					games, languages (both human and computer), and a bit of philosophy
+					too.
+				</p>
+				<em>
+					Ping me on twitter!
+				</em>
+				<div className="flex flex-wrap items-center gap-2 mt-2">
+					<SocialIcon
+						href="mailto:ashish.khare3110+portfolio@gmail.com"
+						network="mailto"
+						className="size-8!"
 					/>
-				</a>
+					{socials.map(({ href, network }) => (
+						<SocialIcon
+							key={href}
+							href={href}
+							network={network}
+							className="size-8!"
+						/>
+					))}
+				</div>
 			</div>
 		</div>
 	);

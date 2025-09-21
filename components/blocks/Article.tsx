@@ -1,8 +1,14 @@
 import type { PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
 
-export default function Article({ children, className }: PropsWithChildren & { className?: string }) {
-    return <article className={twMerge(`
+export default function Article({
+	children,
+	className,
+}: PropsWithChildren & { className?: string }) {
+	return (
+		<article
+			className={twMerge(
+				`
     prose prose-lg prose-invert max-w-none
     prose-headings:text-[var(--color-fore)]
     prose-p:text-[var(--color-fore)]
@@ -14,5 +20,11 @@ export default function Article({ children, className }: PropsWithChildren & { c
     prose-ol:text-[var(--color-fore)] prose-ul:text-[var(--color-fore)]
     prose-li:marker:text-[var(--color-accent)]
     prose-hr:border-[var(--color-accent)]
-  `, className)}>{children}</article>;
+  `,
+				className,
+			)}
+		>
+			{children}
+		</article>
+	);
 }

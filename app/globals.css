@@ -4,8 +4,8 @@
 @theme {
 	/* base colors */
 	--color-black-main: #121212;
-	--color-fore: #E0E0E0;
-	--color-accent: #10B981;
+	--color-fore: #e0e0e0;
+	--color-accent: #10b981;
 
 	/* code/editor colors */
 	--color-editor-padding: 16px;
@@ -23,10 +23,10 @@
 	--color-property: #3ecf8e;
 	--color-highlight: #232323;
 	--color-highlight-border: #383838;
-	--color-highlight-hover: #1D1D1D;
-	--color-diff-deleted: #F06A50;
+	--color-highlight-hover: #1d1d1d;
+	--color-diff-deleted: #f06a50;
 	--color-diff-inserted: #3ecf8e;
-	--color-accent-hover: #34D399;
+	--color-accent-hover: #34d399;
 }
 
 body {

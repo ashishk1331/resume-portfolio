@@ -23,7 +23,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" className="scroll-smooth">
-			<body className={`${barlow.variable} antialiased bg-black-main text-fore`}>
+			<body
+				className={`${barlow.variable} antialiased bg-black-main text-fore`}
+			>
 				<Navbar />
 				<div className="container mx-auto max-w-4xl mt-12 mb-32 p-4 space-y-8">
 					{children}

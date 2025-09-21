@@ -7,7 +7,7 @@ export default function LandingBanner() {
 				src="/landing/avatar.webp"
 				width={512}
 				height={512}
-				className="col-span-1 md:col-start-2 w-full rounded-full"
+				className="col-span-2 md:col-span-1 md:col-start-2 w-full rounded-full"
 				alt="A photo of me."
 			/>
 		</div>

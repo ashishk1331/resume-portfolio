@@ -32,15 +32,9 @@ const CustomPre = ({ children, ...props }: HTMLAttributes<HTMLPreElement>) => {
 
 	return (
 		<div>
-			{language && (
-				<div className="pre-div">
-					{language}
-				</div>
-			)}
-			<pre {...props}>
-				{children}
-			</pre>
-		</div >
+			{language && <div className="pre-div">{language}</div>}
+			<pre {...props}>{children}</pre>
+		</div>
 	);
 };
 

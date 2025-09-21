@@ -18,8 +18,8 @@ export default function About() {
 				<h1>About me</h1>
 
 				<p>
-					Hello! I&apos;m a web designer and developer. I&apos;ve built web-based
-					tooling like{" "}
+					Hello! I&apos;m a web designer and developer. I&apos;ve built
+					web-based tooling like{" "}
 					<a
 						href="https://tetra-docs.vercel.app/"
 						target="_blank"
@@ -42,12 +42,17 @@ export default function About() {
 				<p>
 					I have completed my Bachelor of Technology in Computer Science and
 					Engineering from{" "}
-					<a href="https://knit.ac.in/" target="_blank" rel="noopener noreferrer">
+					<a
+						href="https://knit.ac.in/"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
 						Kamla Nehru Institute of Technology, Sultanpur
 					</a>
 					. I graduated with an aggregate CGPA of <em>8.6</em>. (Medium flex) My
-					journey began during my school days when my computer teacher introduced
-					me to algorithms and explained how computers can be helpful.
+					journey began during my school days when my computer teacher
+					introduced me to algorithms and explained how computers can be
+					helpful.
 				</p>
 
 				<h2>Machine Learning Engineer</h2>
@@ -71,17 +76,17 @@ export default function About() {
 					</a>
 					. The Generator uses convolutional layers with batch normalization and
 					ReLU activations, while the Discriminator uses LeakyReLU. I was
-					impressed by how effectively the networks learned image patterns through
-					adversarial training—essentially a game between two networks trying to
-					outsmart each other.
+					impressed by how effectively the networks learned image patterns
+					through adversarial training—essentially a game between two networks
+					trying to outsmart each other.
 				</p>
 
 				<p>Yes, I love flowers and truly appreciate their beauty.</p>
 
 				<ul className="list-decimal [&_li]:ml-4">
 					<span>
-						Here are some notebooks where I&apos;ve used convolutional and pooling
-						networks to solve classification problems:
+						Here are some notebooks where I&apos;ve used convolutional and
+						pooling networks to solve classification problems:
 					</span>
 					<li>
 						<a
@@ -122,8 +127,8 @@ export default function About() {
 						Iris dataset
 					</a>
 					? I&apos;ve used Pandas, NumPy, Seaborn, and Scikit-learn to perform
-					EDA, visualization, and model training on it. Datasets I&apos;ve worked
-					with for <em>Linear Regression</em> and <em>Classification</em>{" "}
+					EDA, visualization, and model training on it. Datasets I&apos;ve
+					worked with for <em>Linear Regression</em> and <em>Classification</em>{" "}
 					problems:{" "}
 					<a
 						href="https://www.kaggle.com/code/ashishk1331/palmer-penguins"
@@ -215,8 +220,8 @@ export default function About() {
 				<h2>Pythonista</h2>
 
 				<p>
-					I adore python. Only the computer language! I&apos;ve used it to do web
-					scraping, building APIs and even for image processing. The{" "}
+					I adore python. Only the computer language! I&apos;ve used it to do
+					web scraping, building APIs and even for image processing. The{" "}
 					<a
 						href="https://github.com/ashishk1331/bleach-database"
 						target="_blank"
@@ -241,8 +246,9 @@ export default function About() {
 						bf compiler
 					</a>{" "}
 					are written in python. The simplicity of Python has captivated me for
-					years. You can write Python as if you were reading English. Here are few
-					lines from the zen of python one could also apply in their daily lives.
+					years. You can write Python as if you were reading English. Here are
+					few lines from the zen of python one could also apply in their daily
+					lives.
 				</p>
 
 				<blockquote className="italic">
@@ -254,8 +260,8 @@ export default function About() {
 				<h2>App Developer</h2>
 
 				<p>
-					Yes, I can also build mobile apps using React Native and Expo. I&apos;ve
-					built apps like{" "}
+					Yes, I can also build mobile apps using React Native and Expo.
+					I&apos;ve built apps like{" "}
 					<a
 						href="https://feather-website.vercel.app/"
 						target="_blank"
@@ -279,11 +285,11 @@ export default function About() {
 					>
 						commit
 					</a>
-					. Altar and Commit were great exercises for the mind, as I incorporated
-					React Query for efficient queries, a mini design system for uniform
-					designs across entire application, proper authentication and even
-					animations. Commit is evolving rapidly, and I&apos;m excited to turn it
-					into a full-fledged app soon.
+					. Altar and Commit were great exercises for the mind, as I
+					incorporated React Query for efficient queries, a mini design system
+					for uniform designs across entire application, proper authentication
+					and even animations. Commit is evolving rapidly, and I&apos;m excited
+					to turn it into a full-fledged app soon.
 				</p>
 
 				<p>
@@ -301,8 +307,8 @@ export default function About() {
 				<h2>Design Angle</h2>
 
 				<p>
-					I also design my own apps and website. Also, Figma is the fantastic tool
-					for designing. Here are few designs I&apos;ve made:
+					I also design my own apps and website. Also, Figma is the fantastic
+					tool for designing. Here are few designs I&apos;ve made:
 				</p>
 
 				<ol className="mt-4 list-decimal space-y-2 pl-4">
@@ -342,20 +348,21 @@ export default function About() {
 					<br />
 					I&apos;ve spent the last few months listening to &quot;Hurry Up
 					Tomorrow&quot; by The Weeknd, who recently announced that this will be
-					his last album and that he&apos;ll be retiring his stage name. Man! The
-					vocals on &quot;HUT&quot; are angelic—exemplary! Speaking of exemplary,
-					Kendrick Lamar&apos;s growing influence and chance to perform at the
-					Super Bowl halftime show are shining examples of his success.
+					his last album and that he&apos;ll be retiring his stage name. Man!
+					The vocals on &quot;HUT&quot; are angelic—exemplary! Speaking of
+					exemplary, Kendrick Lamar&apos;s growing influence and chance to
+					perform at the Super Bowl halftime show are shining examples of his
+					success.
 					<br />
 					&quot;CHROMAKOPIA&quot; is a great album. I spent all of November
 					listening to Tyler. He really put out some great work for us to
 					appreciate. 2024 was packed with great albums and projects.
 					<br />
-					This year, I&apos;ve also spent most of my time listening to Kanye West.
-					He&apos;s the GOAT, no doubt. &quot;Flashing Lights&quot; has been on
-					repeat since last year. Then, Billie also dropped &quot;Hit Me Hard and
-					Soft,&quot; which was exactly the experience I needed to cure my winter
-					blues. Finneas did a fantastic job with production.
+					This year, I&apos;ve also spent most of my time listening to Kanye
+					West. He&apos;s the GOAT, no doubt. &quot;Flashing Lights&quot; has
+					been on repeat since last year. Then, Billie also dropped &quot;Hit Me
+					Hard and Soft,&quot; which was exactly the experience I needed to cure
+					my winter blues. Finneas did a fantastic job with production.
 				</p>
 			</Article>
 			<Footer />
