@@ -50,11 +50,11 @@ export default function Projects() {
 									className="size-5 aspect-square rounded"
 								/>
 								<h3 className="font-medium text-lg">{project.title}</h3>
-								<h3 className="text-lg text-neutral-400">{project.date}</h3>
-								<ExternalLink size={12} className="text-neutral-400 mt-0.5" />
+								<h3 className="text-lg text-accent">{project.date}</h3>
+								<ExternalLink size={12} className="text-accent mt-0.5" />
 							</a>
 							<p>{project.desc}</p>
-							<div className="flex items-center gap-1 text-neutral-400">
+							<div className="flex items-center gap-1 text-accent">
 								<p>{project.stack}</p>
 							</div>
 						</div>

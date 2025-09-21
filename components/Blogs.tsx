@@ -20,7 +20,7 @@ export default function Blogs() {
 				<Link
 					href="/blog/"
 					rel="noopener noreferrer"
-					className="inline-flex w-full text-center justify-center-safe gap-1 items-center bg-neutral-50 p-2 rounded-md"
+					className="inline-flex w-full text-center justify-center-safe gap-1 items-center p-2 rounded-md border-2 border-neutral-800"
 				>
 					<span className="inline">View all</span>
 					<ArrowRight

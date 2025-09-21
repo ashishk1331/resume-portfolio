@@ -1,18 +1,16 @@
 import { format } from "date-fns";
-import { ArrowLeft, Dot, House } from "lucide-react";
+import { ArrowLeft, Dot } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
 import rehypePrismPlus from "rehype-prism-plus";
 import remarkGfm from "remark-gfm";
 import { getBlogContent } from "@/lib/blogUtil";
-// Import Prism CSS theme
-import "prismjs/themes/prism-coy.css"; // Dark theme
+import "@/styles/prism-supabase.css";
 import type { HTMLAttributes, ImgHTMLAttributes } from "react";
-import Link from "next/link";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import Article from "@/components/blocks/Article";
 
-// Custom Image Component
 const CustomImage = ({ src, alt }: ImgHTMLAttributes<HTMLImageElement>) => {
 	if (!src) return null;
 
@@ -29,13 +27,20 @@ const CustomImage = ({ src, alt }: ImgHTMLAttributes<HTMLImageElement>) => {
 };
 
 const CustomPre = ({ children, ...props }: HTMLAttributes<HTMLPreElement>) => {
+	const languageMatch = props.className?.match(/language-(\w+)/);
+	const language = languageMatch ? languageMatch[1] : null;
+
 	return (
-		<pre
-			className="my-6 overflow-x-auto rounded-lg border bg-gray-900 p-4"
-			{...props}
-		>
-			{children}
-		</pre>
+		<div>
+			{language && (
+				<div className="pre-div">
+					{language}
+				</div>
+			)}
+			<pre {...props}>
+				{children}
+			</pre>
+		</div >
 	);
 };
 
@@ -54,12 +59,7 @@ export default async function Blog({
 				items={[
 					{
 						id: "home",
-						label: (
-							<>
-								<House size={16} className="inline-block align-middle" />
-								<span>Home</span>
-							</>
-						),
+						label: <span>Home</span>,
 						href: "/",
 					},
 					{
@@ -74,20 +74,15 @@ export default async function Blog({
 					},
 				]}
 			/>
-			<Link
-				href="/"
-				className="flex items-center gap-2 mb-12 bg-neutral-100 border border-neutral-200 px-3 py-1 rounded cursor-pointer active:scale-90 transition no-underline w-fit font-normal mt-8"
-			>
-				<ArrowLeft size={16} />
-				<span>Go Back</span>
-			</Link>
-			<h1>{metadata.title}</h1>
-			<span className="flex items-center gap-2">
-				<p>{metadata.author}</p>
-				<Dot size={16} />
-				<p>{format(metadata.pubDate, "d MMM yyyy")}</p>
-			</span>
-			<article className="prose prose-lg max-w-none">
+			<div className="flex flex-col items-start gap-4 my-12">
+				<h1 className="text-2xl md:text-4xl font-bold">{metadata.title}</h1>
+				<div className="flex text-lg items-center gap-2 text-neutral-500">
+					<p>{metadata.author}</p>
+					<Dot size={16} />
+					<p>{format(metadata.pubDate, "MMMM d, yyyy")}</p>
+				</div>
+			</div>
+			<Article>
 				<Markdown
 					remarkPlugins={[remarkGfm]}
 					rehypePlugins={[rehypePrismPlus]}
@@ -98,7 +93,7 @@ export default async function Blog({
 				>
 					{content}
 				</Markdown>
-			</article>
+			</Article>
 		</>
 	);
 }

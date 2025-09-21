@@ -12,12 +12,12 @@ export default function Education() {
 				<div className="flex flex-col items-start gap-2">
 					<div className="flex items-start gap-2">
 						<h3 className="font-medium text-lg">KNIT Sultanpur</h3>
-						<h3 className="font-medium text-lg text-neutral-400">
+						<h3 className="font-medium text-lg text-accent">
 							25&apos; batch
 						</h3>
 					</div>
 					<p>Bachelor of Science in Computer Science and Engineering</p>
-					<div className="flex items-center gap-1 text-neutral-400">
+					<div className="flex items-center gap-1 text-accent">
 						<p>Cumulative GPA: 8.6</p>
 						<Dot size={16} />
 						<p>Div-I (Hons)</p>

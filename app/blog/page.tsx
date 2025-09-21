@@ -1,7 +1,6 @@
 import Footer from "@/components/Footer";
 import MegaBlogs from "@/components/MegaBlogs";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
-import { House } from "lucide-react";
 
 export default function BlogsPage() {
 	return (
@@ -10,12 +9,7 @@ export default function BlogsPage() {
 				items={[
 					{
 						id: "home",
-						label: (
-							<>
-								<House size={16} className="inline-block align-middle" />
-								<span>Home</span>
-							</>
-						),
+						label: <span>Home</span>,
 						href: "/",
 					},
 					{

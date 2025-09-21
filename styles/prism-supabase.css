@@ -1,0 +1,122 @@
+/* Base styles for code + pre */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: var(--color-foreground);
+  background: #1f1f1f;
+  font-family: "Fira Code", "Fira Mono", monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-shadow: none;
+}
+
+pre[class*="language-"] {
+  padding: var(--color-editor-padding);
+  margin: 0;
+  overflow: auto;
+  border-radius: 0;
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+  border: 1px solid var(--color-highlight-border);
+  transition: background 0.2s ease-in-out;
+}
+
+.pre-div {
+  background: var(--color-highlight-border);
+  padding: 0.5rem var(--color-editor-padding);
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  font-family: "Fira Code", "Fira Mono", monospace;
+  font-size: 0.9rem;
+}
+
+/* Inline <code> */
+:not(pre) > code[class*="language-"] {
+  background: var(--color-highlight);
+  color: var(--color-string-expression);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.85em;
+  border: 1px solid var(--color-highlight-border);
+}
+
+/* Syntax tokens */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--color-comment);
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: var(--color-punctuation);
+}
+
+.token.constant,
+.token.symbol {
+  color: var(--color-constant);
+}
+
+.token.boolean,
+.token.number {
+  color: var(--color-number);
+}
+
+.token.property {
+  color: var(--color-property);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin {
+  color: var(--color-string);
+}
+
+.token.string-expression {
+  color: var(--color-string-expression);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.token.variable {
+  color: var(--color-parameter);
+}
+
+.token.keyword,
+.token.atrule {
+  color: var(--color-keyword);
+}
+
+.token.function,
+.token.class-name {
+  color: var(--color-function);
+}
+
+.token.regex,
+.token.important {
+  color: var(--color-constant);
+}
+
+.token.deleted {
+  color: var(--color-diff-deleted);
+}
+
+.token.inserted {
+  color: var(--color-diff-inserted);
+}
+
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+
+/* Links inside code (Markdown style) */
+.token.link {
+  color: var(--color-link);
+  text-decoration: underline;
+}

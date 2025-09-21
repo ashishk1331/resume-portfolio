@@ -4,11 +4,11 @@ export default function LandingBanner() {
 	return (
 		<div className="grid grid-cols-6 gap-8 p-2">
 			<Image
-				src="/landing/banner.webp"
-				width={1024}
+				src="/landing/avatar.webp"
+				width={512}
 				height={512}
-				className="col-span-full w-full rounded-md"
-				alt="Landing page banner. A photo of me."
+				className="col-span-1 md:col-start-2 w-full rounded-full"
+				alt="A photo of me."
 			/>
 		</div>
 	);

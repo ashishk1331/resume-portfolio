@@ -81,7 +81,7 @@ export default function Achievements() {
 						<span className="inline">{label}</span>
 						<ExternalLink
 							size={12}
-							className="inline-block align-middle text-neutral-400 ml-1"
+							className="inline-block align-middle text-accent ml-1"
 						/>
 					</a>
 				))}
