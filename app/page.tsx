@@ -2,7 +2,6 @@ import Achievements from "@/components/Achievements";
 import Blogs from "@/components/Blogs";
 import Education from "@/components/Education";
 import Experience from "@/components/Experience";
-import Footer from "@/components/Footer";
 import Introduction from "@/components/Introduction";
 import LandingBanner from "@/components/LandingBanner";
 import Projects from "@/components/Projects";
@@ -19,7 +18,6 @@ export default function Home() {
 			<Education />
 			<Achievements />
 			<Blogs />
-			<Footer />
 		</>
 	);
 }

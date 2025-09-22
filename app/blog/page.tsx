@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import MegaBlogs from "@/components/MegaBlogs";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
@@ -20,7 +19,6 @@ export default function BlogsPage() {
 				]}
 			/>
 			<MegaBlogs />
-			<Footer />
 		</>
 	);
 }

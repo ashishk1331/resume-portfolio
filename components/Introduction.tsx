@@ -18,9 +18,7 @@ export default function Introduction() {
 					games, languages (both human and computer), and a bit of philosophy
 					too.
 				</p>
-				<em>
-					Ping me on twitter!
-				</em>
+				<em>Ping me on twitter!</em>
 				<div className="flex flex-wrap items-center gap-2 mt-2">
 					<SocialIcon
 						href="mailto:ashish.khare3110+portfolio@gmail.com"

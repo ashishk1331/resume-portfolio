@@ -11,10 +11,15 @@ export default function NotFound() {
 				<p>No such route exists.</p>
 				<Link
 					href="/"
-					className="flex items-center gap-2 mb-12 bg-neutral-100 border border-neutral-200 px-3 py-1 rounded cursor-pointer active:scale-90 transition no-underline w-fit font-normal"
+					className="flex items-center gap-2 mb-12 px-2 py-1 rounded cursor-pointer active:scale-95 transition no-underline w-fit font-medium
+             bg-[var(--color-accent)]
+             text-[var(--color-black-main)]
+             border border-[var(--color-accent)]
+             hover:bg-[var(--color-accent-hover)]
+             hover:border-[var(--color-accent-hover)]"
 				>
 					<ArrowLeft size={16} />
-					<span>Go Back</span>
+					<span className="text-sm">Go Back</span>
 				</Link>
 			</div>
 		</div>
