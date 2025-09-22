@@ -13,7 +13,7 @@ export default function Blogs() {
 					<h3 className="font-medium text-lg">Blogs</h3>
 				</a>
 			</div>
-			<div className="col-span-full md:col-span-4 flex flex-col items-start [&_a]:hover:underline">
+			<div className="col-span-full md:col-span-4 flex flex-col items-start [&_a]:hover:underline gap-4">
 				{blogs.map((blog) => (
 					<BlogPost key={blog.slug} blog={blog} />
 				))}

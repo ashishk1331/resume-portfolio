@@ -2,6 +2,7 @@ import { type BlogMetadata } from "@/lib/blogUtil";
 import Image from "next/image";
 import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 
 type BlogProps = {
 	blog: BlogMetadata;
@@ -12,7 +13,7 @@ export default function BlogPost({ blog }: BlogProps) {
 	const blogURL = `/blog/${slug}`;
 
 	return (
-		<div className="w-full flex flex-col mb-8 break-inside-avoid text-sm">
+		<div className="w-full h-auto flex flex-col break-inside-avoid text-sm">
 			{banner && (
 				<Image
 					src={banner.substring(1)}
@@ -22,17 +23,22 @@ export default function BlogPost({ blog }: BlogProps) {
 					className="w-full object-cover aspect-video rounded-t-md shadow-xl"
 				/>
 			)}
-			<div className="flex flex-col items-left gap-2 p-4 bg-background rounded-b-md border-b-2 border-x-2 border-neutral-800">
+			<div
+				className={twMerge(
+					"h-full flex flex-col items-left gap-2 p-4 bg-background rounded-b-md border-b-2 border-x-2 border-neutral-800",
+					!banner && "border-2 rounded-md",
+				)}
+			>
 				<div className="w-full flex items-center justify-between text-sm text-accent">
 					<span>{author}</span>
 					<span>{format(pubDate, "d MMMM yyyy")}</span>
 				</div>
 				<h1 className="text-xl mb-1">{title}</h1>
-				<span>{description}</span>
+				<span className="mb-2">{description}</span>
 				<a
 					href={blogURL}
 					rel="noopener noreferrer"
-					className="inline-flex text-left items-center text-accent mt-2"
+					className="inline-flex text-left items-center text-accent mt-auto"
 				>
 					<span className="inline font-medium">Read More</span>
 					<ArrowRight size={12} className="inline-block align-middle ml-1" />
