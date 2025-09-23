@@ -8,6 +8,45 @@ hasAudio: false
 draft: false
 banner: ./assets/prompts-should-live-outside-ii/banner.webp
 prompt: Create a website blog banner based on the image uploaded. Output a 16 to 9 ratio image in HD. Preserve the artistic style and colors of the image. In this scene, the dog is swimming through a pond with a flower gradually landing on his forehead.
+content:
+  platform: "ChatGPT"
+  type: "Image"
+  date: "2025-09-22"
+  time: "20:43:57"
+  period: "PM"
 ---
 
 ![banner](./assets/prompts-should-live-outside-ii/banner.webp)
+
+This post continues my earlier discussion on placing prompts as templates for GenAI applications outside the code and rendering them with dynamic values. In essence, it reduces the problem to a basic template-based solution. However, in that discussion, I only covered pure text prompts. But what if you also want to share more than just text with LLMs? What about images, PDFs or external links? How to manage them?
+
+## Markdown files
+
+The best format for storing static text along with images and other resources is *Markdown*. You can also extend it with GitHub Flavored Markdown, which supports tables as well.
+
+With Markdown files, you can combine templating to increase the flexibility of prompt templates.
+
+```md
+---
+title: Project Report
+author: Ashish Khare
+date: 2025-09-23
+---
+
+# {{title}}
+
+*Author:* **{{author}}**  
+*Date:* {{date}}
+
+## Images
+
+![Local Diagram](./images/diagram.png)
+![Remote Image](https://example.com/banner.png)
+
+## PDF Resources
+
+- [Download Report](./files/report.pdf)
+- [External Whitepaper](https://arxiv.org/pdf/2201.12345.pdf)
+```
+
+The above code shows how you can use markdown templates to link to different pieces.
