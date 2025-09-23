@@ -65,6 +65,66 @@ If Offset < 0 → Current Week + |Offset| Weeks = Future Week
 
 However, doing this in `react-virtuoso` was tricky, since it only counts rows from zero up to the total row count. To solve this, I chose the middle (`total_row_count / 2`) as the starting point, scrolled to it [initially](https://virtuoso.dev/initial-index/), and then computed weeks relative to it. The offset is simply `(middle - row_index)`. The sign of the offset tells us whether to add weeks (future) or subtract weeks (past).
 
+## Code
+
+Here is the main table for the weeks to be rendered. I’ve used the `rangeChanged` function from the virtualized list to calculate the middle of the rendered range, which is then used to determine the active month. I’ve also reduced the `overscan` property to render only 2 rows outside the viewport. This improves the efficiency of row rendering.
+
+In addition, I’ve calculated the `offset` based on the middle of the active range to determine the date corresponding to the start of the currently visible week. If the offset is negative, you subtract weeks from the current week. Otherwise, you add weeks to the current week.
+
+```tsx
+// CalendarTable
+
+const TOTAL_WEEKS = 100_000;
+const START_INDEX = TOTAL_WEEKS / 2;
+
+const [activeRangeMid, setActiveRangeMid] = useState(START_INDEX);
+const [currentItemIndex, setCurrentItemIndex] = useState(-1);
+
+function getWeekStartDate(index: number, startIndex: number): Date {
+  const baseWeekStart = startOfWeek(new Date());
+  const offset = index - startIndex;
+  return offset >= 0
+    ? addWeeks(baseWeekStart, offset)
+    : subWeeks(baseWeekStart, -offset);
+}
+
+<Virtuoso
+  totalCount={TOTAL_WEEKS}
+  initialTopMostItemIndex={START_INDEX - 1}
+  overscan={2}
+  increaseViewportBy={200}
+  context={{ currentItemIndex, isScrolling }}
+  rangeChanged={({ endIndex, startIndex }) =>
+    setActiveRangeMid(Math.round((endIndex + startIndex) / 2))
+  }
+/>
+```
+
+The rest of the rendering logic for the week is straightforward. You calculate the start of the week and create an array of 7 days, where each day object includes properties such as `isCurrentMonth` and `isToday`. A grid is then used to render the days.
+
+```tsx
+// CalendarRow
+
+const weekStart = getWeekStartDate(activeRangeMid, START_INDEX);
+const days: Day[] = Array.from({ length: 7 }, (_, i) => {
+  const date = addDays(weekStart, i);
+  return {
+    date: format(date, "dd/MM/yyyy"),
+    day: format(date, "d"),
+    isCurrentMonth: getMonth(date) === activeMonth,
+    isToday: isToday(date),
+  };
+});
+
+<div className="relative">
+  <div className="relative grid grid-cols-7 gap-px">
+    {days.map((day) => (
+      <CalendarCell key={day.date} {...day} />
+    ))}
+  </div>
+</div>
+```
+
 ## Conclusion
 
 We can treat the middle as the origin, calculate offsets on both sides, and then decide based on the sign whether to move forward (future) or backward (past).
