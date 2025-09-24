@@ -1,11 +1,11 @@
 import { format } from "date-fns";
-import { ArrowLeft, Dot } from "lucide-react";
+import { Dot } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
 import rehypePrismPlus from "rehype-prism-plus";
 import remarkGfm from "remark-gfm";
-import { getBlogContent } from "@/lib/blogUtil";
+import { getAllBlogsSlug, getBlogContent } from "@/lib/blogUtil";
 import "@/styles/prism-supabase.css";
 import type { HTMLAttributes, ImgHTMLAttributes } from "react";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
@@ -49,25 +49,6 @@ export default async function Blog({
 	const { metadata, content } = blog;
 	return (
 		<>
-			<Breadcrumbs
-				items={[
-					{
-						id: "home",
-						label: <span>Home</span>,
-						href: "/",
-					},
-					{
-						id: "blogs",
-						label: <span>Blogs</span>,
-						href: "/blog",
-					},
-					{
-						id: "individual-blog",
-						label: <span>{metadata.title}</span>,
-						href: `/blog/${metadata.slug}`,
-					},
-				]}
-			/>
 			<div className="flex flex-col items-start gap-4 my-12">
 				<h1 className="text-2xl md:text-4xl font-bold">{metadata.title}</h1>
 				<div className="flex text-lg items-center gap-2 text-neutral-500">
@@ -77,6 +58,13 @@ export default async function Blog({
 				</div>
 			</div>
 			<Article>
+				<Image
+					src={`/assets/${metadata.slug}/banner.webp`}
+					width={512}
+					height={512}
+					alt={`Banner for ${metadata.title}`}
+					className="w-full h-auto object-cover rounded"
+				/>
 				<Markdown
 					remarkPlugins={[remarkGfm]}
 					rehypePlugins={[rehypePrismPlus]}
@@ -90,4 +78,8 @@ export default async function Blog({
 			</Article>
 		</>
 	);
+}
+
+export async function generateStaticParams() {
+	return getAllBlogsSlug()
 }

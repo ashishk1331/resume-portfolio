@@ -23,7 +23,7 @@ export function getBlogMetadata(slug: string): BlogMetadata | null {
 		// Use gray-matter to parse frontmatter and content
 		const { data } = matter(fileContent);
 
-		return data as BlogMetadata;
+		return { ...data, slug } as BlogMetadata;
 	} catch (error) {
 		console.error(`Error reading metadata for ${slug}:`, error);
 		return null;
@@ -42,7 +42,7 @@ export function getBlogContent(
 		const { data, content } = matter(fileContent);
 
 		return {
-			metadata: data as BlogMetadata,
+			metadata: { ...data, slug } as BlogMetadata,
 			content: content, // This is the content WITHOUT frontmatter
 		};
 	} catch (error) {
@@ -73,6 +73,26 @@ export function getAllBlogsWithMetadata(): Array<
 			return metadata ? { ...metadata, slug } : null;
 		})
 		.filter(Boolean) as Array<BlogMetadata & { slug: string }>;
+}
+
+// Function to fetch slugs of every blog
+export function getAllBlogsSlug(): Array<{ slug: string }> {
+	const blogsDir = path.join(process.cwd(), "blogs");
+
+	if (!fs.existsSync(blogsDir)) {
+		console.warn("Blogs directory not found:", blogsDir);
+		return [];
+	}
+
+	const files = fs
+		.readdirSync(blogsDir)
+		.filter((file) => file.endsWith(".mdx"));
+
+	return files
+		.map((file) => {
+			const slug = file.replace(".mdx", "");
+			return { slug };
+		});
 }
 
 // Method 4: Get published blogs only

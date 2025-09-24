@@ -1,6 +1,5 @@
 ---
 title: Prompts should live outside.
-slug: prompts-should-live-outside
 pubDate: 2025-09-16
 description: Explore ways to store prompts outside application logic, treating them as separate, interpolable data entities.
 author: Ashish Khare
@@ -8,8 +7,6 @@ hasAudio: false
 draft: false
 banner: ./assets/prompts-should-live-outside/banner.webp
 ---
-
-![banner](./assets/prompts-should-live-outside/banner.webp)
 
 Recently, I’ve been working on an AI wrapper with NextJS and the Google GenAI SDK. For the most part, the entire context text and prompts lived inside the functions, which bloated the function bodies. A file that could have been just 50 lines grew to around 500 lines. 🤯 This pushed me to move all the prompt text into separate files and organize them under a `prompts` folder. Not only because of the file length, but also because it became difficult to view functions together and identify areas for change.
 

@@ -2,32 +2,26 @@ import { type BlogMetadata } from "@/lib/blogUtil";
 import Image from "next/image";
 import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";
-import { twMerge } from "tailwind-merge";
 
 type BlogProps = {
 	blog: BlogMetadata;
 };
 
 export default function BlogPost({ blog }: BlogProps) {
-	const { author, pubDate, title, description, banner, slug } = blog;
+	const { author, pubDate, title, description, slug } = blog;
 	const blogURL = `/blog/${slug}`;
 
 	return (
 		<div className="w-full h-auto flex flex-col break-inside-avoid text-sm">
-			{banner && (
-				<Image
-					src={banner.substring(1)}
-					alt={title}
-					width={512}
-					height={512}
-					className="w-full object-cover aspect-video rounded-t-md shadow-xl"
-				/>
-			)}
+			<Image
+				src={`/assets/${blog.slug}/banner.webp`}
+				alt={title}
+				width={512}
+				height={512}
+				className="w-full object-cover aspect-video rounded-t-md shadow-xl"
+			/>
 			<div
-				className={twMerge(
-					"h-full flex flex-col items-left gap-2 p-4 bg-background rounded-b-md border-b-2 border-x-2 border-neutral-800",
-					!banner && "border-2 rounded-md",
-				)}
+				className="h-full flex flex-col items-left gap-2 p-4 bg-background rounded-b-md border-b-2 border-x-2 border-neutral-800"
 			>
 				<div className="w-full flex items-center justify-between text-sm text-accent">
 					<span>{author}</span>
