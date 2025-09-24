@@ -8,7 +8,6 @@ import remarkGfm from "remark-gfm";
 import { getAllBlogsSlug, getBlogContent } from "@/lib/blogUtil";
 import "@/styles/prism-supabase.css";
 import type { HTMLAttributes, ImgHTMLAttributes } from "react";
-import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Article from "@/components/blocks/Article";
 
 const CustomImage = ({ src, alt }: ImgHTMLAttributes<HTMLImageElement>) => {

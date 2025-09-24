@@ -1,72 +1,71 @@
 ---
-title: Building a pseudo infinite calendar
+title: Building a Pseudo-Infinite Calendar
 pubDate: 2025-09-23
-description: A dynamic way to render only the required weeks on to the screen using virtualized lists.
+description: A dynamic way to render only the required weeks on the screen using virtualized lists.
 author: Ashish Khare
 hasAudio: false
 draft: false
 banner: ./assets/building-a-pseudo-infinite-calendar/banner.webp
 ---
 
-Let me start off with what we are going to build. The challenge is to create an infinite calendar where you can view daily recorded journals. We'll strictly focus on implementing the calendar.
+Let’s start with what we’re going to build. The challenge is to create a pseudo-infinite calendar where you can view daily recorded journals. We'll focus strictly on implementing the calendar.
 
-
-Demo: [Infinite calendar](https://infinite-calendar-scroll.vercel.app/)
+Demo: [Infinite Calendar](https://infinite-calendar-scroll.vercel.app/)
 
 ## Requirements
 
-Here are some requirements for buttery-smooth ui.
+Here are some requirements for a buttery-smooth UI:
 
 1. Implement infinite past/future scroll
-2. Ensure continuous scroll — not snap-to-month
-3. Support partial visibility of two months in viewport
-4. Implement seamless loading of new months without flicker or jumps
+2. Ensure continuous scroll — no snap-to-month behavior
+3. Support partial visibility of two months in the viewport
+4. Load new months seamlessly without flicker or jumps
 5. Virtualize rows (weeks) to reduce DOM nodes
 6. Compute week rows on the fly
 7. Optimize images with lazy loading
 
-
-For this task, I wanted to experiment with virtual lists and on-demand week data generation. The image shows the intuition behind the trick I used to render (almost or pseudo) infinite months on the calendar. I broke it into two parts — let’s talk about both.
+For this task, I experimented with virtual lists and on-demand week data generation. The image below illustrates the trick I used to render (pseudo-)infinite months in the calendar. I broke the approach into two parts — let’s go through both.
 
 ![Illustration explaining the calendar loadout](./assets/building-a-pseudo-infinite-calendar/technique.webp)
 
-## Only Future
-At first, I thought about how to generate future months. This can be done by adding subsequent weeks to the current week. (Here, the `date-fns` library helped a lot by handling edge cases for calendar days.) For example:
+## Only the Future
+
+First, I tackled generating future months. This can be done by adding subsequent weeks to the current week. The `date-fns` library was especially helpful in handling edge cases for calendar dates. For example:
 
 ```md
-Current Week + 1 Week = Next Week
-Current Week + 2 Weeks = Second Week in the Future
-...
-and so on.
+Current Week + 1 Week = Next Week  
+Current Week + 2 Weeks = Second Week in the Future  
+...  
 
-Broadly,
+Broadly,  
 Current Week + n Weeks = nth Week in the Future
 ```
 
-For a continuous calendar, we don’t need to worry about month padding. All we need to do is calculate the nth week in the future that’s requested for rendering.
+Since the calendar is continuous, we don’t need to worry about month padding. We only need to calculate the requested week.
 
-In this case, I used the `react-virtuoso` feature that returns the index of the row being rendered on the screen. We can use this index directly to calculate the week needed. This way, we can render (almost) infinite months into the future.
+I used the `react-virtuoso` feature that provides the index of the row being rendered on the screen. This index directly maps to the required week, making it possible to render (almost) infinite months into the future.
 
-## Past as Well
-Rendering past months was more challenging. For some reason, binary search kept coming to mind — so I thought, why not start in the middle and expand in both directions?
+## The Past Too
 
-By splitting the rows into two parts, the upper part represents past weeks and the lower part represents future weeks, with the current week in the middle (see the image). We can then reuse the previous technique to calculate weeks.
+Rendering past months was more challenging. I thought about binary search and figured: why not start in the middle and expand in both directions?
+
+By splitting rows into two parts, the upper section represents past weeks and the lower section represents future weeks, with the current week in the middle (see the image). The previous technique can then be reused to calculate weeks.
 
 ```md
-Middle Row – Row Index = Offset
+Middle Row – Row Index = Offset  
 
 If Offset > 0 → Current Week – Offset Weeks = Past Week  
 If Offset = 0 → Current Week  
 If Offset < 0 → Current Week + |Offset| Weeks = Future Week
 ```
 
-However, doing this in `react-virtuoso` was tricky, since it only counts rows from zero up to the total row count. To solve this, I chose the middle (`total_row_count / 2`) as the starting point, scrolled to it [initially](https://virtuoso.dev/initial-index/), and then computed weeks relative to it. The offset is simply `(middle - row_index)`. The sign of the offset tells us whether to add weeks (future) or subtract weeks (past).
+However, `react-virtuoso` indexes rows from zero to the total count, so I set the middle (`total_row_count / 2`) as the starting point, scrolled to it [initially](https://virtuoso.dev/initial-index/), and computed weeks relative to that point. The offset is simply `(middle - row_index)`. Its sign tells us whether to add weeks (future) or subtract weeks (past).
 
 ## Code
 
-Here is the main table for the weeks to be rendered. I’ve used the `rangeChanged` function from the virtualized list to calculate the middle of the rendered range, which is then used to determine the active month. I’ve also reduced the `overscan` property to render only 2 rows outside the viewport. This improves the efficiency of row rendering.
+Here’s the main table logic for rendering weeks. The `rangeChanged` function calculates the midpoint of the rendered range, which determines the active month. I also reduced the `overscan` property to render only two rows outside the viewport for efficiency.
 
-In addition, I’ve calculated the `offset` based on the middle of the active range to determine the date corresponding to the start of the currently visible week. If the offset is negative, you subtract weeks from the current week. Otherwise, you add weeks to the current week.
+In addition, the `offset` from the midpoint determines the start date of the currently visible week. If the offset is negative, you subtract weeks; otherwise, you add them.
 
 ```tsx
 // CalendarTable
@@ -97,7 +96,7 @@ function getWeekStartDate(index: number, startIndex: number): Date {
 />
 ```
 
-The rest of the rendering logic for the week is straightforward. You calculate the start of the week and create an array of 7 days, where each day object includes properties such as `isCurrentMonth` and `isToday`. A grid is then used to render the days.
+The rendering logic for each week is straightforward. Calculate the start of the week, then create an array of seven days. Each day object includes properties such as `isCurrentMonth` and `isToday`. Finally, render them in a grid.
 
 ```tsx
 // CalendarRow
@@ -124,11 +123,8 @@ const days: Day[] = Array.from({ length: 7 }, (_, i) => {
 
 ## Conclusion
 
-We can treat the middle as the origin, calculate offsets on both sides, and then decide based on the sign whether to move forward (future) or backward (past).
+This approach of computing weeks based on the row index is why I call it a *pseudo-infinite calendar*. True infinity only exists in mathematics.
 
-Now, how do we calculate the active month for the header? For this, I found a handy callback prop in the `react-virtuoso` component: [`rangeChanged`](https://virtuoso.dev/range-change-callback/). It provides the `startIndex` and `endIndex` of the currently rendered range (i.e., the weeks being displayed).
+To improve efficiency further, the calendar could be implemented in pure JavaScript without relying on a virtual list. This would involve calculating weeks dynamically based on scroll offset from the center, while maintaining an overscan buffer and tracking the number of rendered rows. This way, you can determine the active month—that is, the month that occupies most of the viewport.
 
-I simply take the mean of these two values and use it to calculate the offset week, which in turn determines the active month and year.
-
-And voila! ✨
-
+By combining dynamic week rendering with virtualization, you can implement a smooth, responsive calendar UI.
