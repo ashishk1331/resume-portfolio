@@ -88,18 +88,21 @@ export function getAllBlogsSlug(): Array<{ slug: string }> {
 		.readdirSync(blogsDir)
 		.filter((file) => file.endsWith(".mdx"));
 
-	return files
-		.map((file) => {
-			const slug = file.replace(".mdx", "");
-			return { slug };
-		});
+	return files.map((file) => {
+		const slug = file.replace(".mdx", "");
+		return { slug };
+	});
 }
 
 // Method 4: Get published blogs only
 export function getPublishedBlogs(): Array<BlogMetadata & { slug: string }> {
-	return getAllBlogsWithMetadata()
-		.filter((blog) => !blog.draft)
-		.sort(
-			(a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime(),
-		);
+	const isAtDev = process.env.NODE_ENV === "development";
+
+	return (
+		getAllBlogsWithMetadata()
+			.filter((blog) => isAtDev || !blog.draft)
+			.sort(
+				(a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime(),
+			)
+	);
 }

@@ -80,5 +80,5 @@ export default async function Blog({
 }
 
 export async function generateStaticParams() {
-	return getAllBlogsSlug()
+	return getAllBlogsSlug();
 }
