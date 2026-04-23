@@ -1,0 +1,35 @@
+---
+title: Why do we need json for UI?
+pubDate: 2026-01-24
+draft: true
+description: Why frameworks like json-render exist for safe guarding AI prompting in applications?
+author: Ashish Khare
+banner: ./assets/why-do-we-need-json-for-ui/banner.webp
+---
+
+Recently I saw a post by [Guillermo](https://x.com/rauchg/status/2011605996561649720?s=20) on twitter, where he talked about a framework that digests json schema defined by zod and excrete UIs. And they called it [json-render](https://json-render.dev/) This really startled me, beacuse why would one store interfaces or stream them as json. I know json is everywhere from pre-loaded nextjs state for page, to API requests.
+
+I also understand the capability of AI models to provide structured output which is leveraged here. Nonetheless, my question is why json. Then I read the "why" section off the README of the project, and the advantage that made most sense was _guard railing_. [[1]](https://github.com/vercel-labs/json-render?tab=readme-ov-file#why-json-render)
+
+Essentially, if you are building an AI application that lets users create interfaces, then many things can go wrong. Firstly, users will need to wait for AI to write the code, then write to the file, which change would be picked by the hot module reloader and lastly it would be refreshed on the screen. This creates noticeable lags between clicking send on prompt and able to see the change appear on the screen.
+
+Secondly, the user may instruct AI model to write something malicious and harm the system, or exploit it. The undeterministic nature of AI model make it extremely difficult to cover every edge case and force alignment for safety. No eval can save you!
+
+The best precaution is to make the output scannable via a deterministic system which can easily decide if things are wrong or good. Hence, json-render comes into picture and further supporting the guard railing of output making outcomes safe and operable in systems. Also, streaming back responses help show changes in real-time rather than unpredictable flicker of changes.
+
+My point is why json. There are a ton of drawbacks of using json, besides it being the best option for streaming data. Easily understandable by every browser.
+
+Concerning points regarding json include,
+1. Easily breakable with no sure recovery
+2. Slow to parse
+3. Highly verbose
+
+Plus, this whole framework requires two steps and transpiling json to components in the target UI library. Also, the process includes an intermediate step of validation. This makes it time taking when you've great number of components and that too chunkier ones. 
+
+This entire framework is the simplest version of a solution to a problem.
+
+---TODO---
+Describe system =
+1. **MCP server for your design system or ui library** [registery for the components and tokens] Design system reminds me how meticulous design engineers were when it came to interfaces and ux contradicting post-shadcn modern bleak ai era 
+2. Ditch JSON, use HTMX request like data sending. Send entire output HTML. Request change for it. \*If required
+3. Offload checks and validation to the parser like Babel. Instead write a plugin for Babel to look for components and use it like es-lint rules declaration for easier offloading and better legibility.
