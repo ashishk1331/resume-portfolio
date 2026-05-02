@@ -14,7 +14,7 @@ export default function Education() {
 						<h3 className="font-medium text-lg">KNIT Sultanpur</h3>
 						<h3 className="font-medium text-lg text-accent">25&apos; batch</h3>
 					</div>
-					<p>Bachelor of Science in Computer Science and Engineering</p>
+					<p>Bachelor of Technology in Computer Science and Engineering</p>
 					<div className="flex items-center gap-1 text-accent">
 						<p>Cumulative GPA: 8.6</p>
 						<Dot size={16} />

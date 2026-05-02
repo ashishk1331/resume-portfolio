@@ -9,32 +9,37 @@ export default function Skills() {
 			<div className="col-span-full md:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-start gap-1 text-sm">
 				<div className="flex flex-col items-start">
 					<h3 className="font-medium text-lg mb-2">Languages</h3>
-					<p>Typescript</p>
+					<p>TypeScript</p>
 					<p>Python</p>
+					<p>Go</p>
 					<p>SQL</p>
-					<p>GoLang</p>
 				</div>
 
 				<div className="flex flex-col items-start">
-					<h3 className="font-medium text-lg mb-2">Technologies</h3>
+					<h3 className="font-medium text-lg mb-2">Backend &amp; Systems</h3>
+					<p>Node.js</p>
+					<p>FastAPI</p>
+					<p>Gin</p>
+					<p>Docker</p>
+					<p>REST APIs</p>
+				</div>
+
+				<div className="flex flex-col items-start">
+					<h3 className="font-medium text-lg mb-2">Frontend &amp; Mobile</h3>
 					<p>NextJS</p>
 					<p>React Native, Expo</p>
-					<p>NodeJS</p>
-					<p>Git</p>
+					<p>React Query</p>
+					<p>Zustand</p>
+					<p>Reanimated</p>
 				</div>
 
 				<div className="flex flex-col items-start">
-					<h3 className="font-medium text-lg mb-2">Tools</h3>
-					<p>Figma</p>
-					<p>Sublime Text</p>
-					<p>Postman</p>
-				</div>
-
-				<div className="flex flex-col items-start">
-					<h3 className="font-medium text-lg mb-2">Platforms</h3>
+					<h3 className="font-medium text-lg mb-2">Databases &amp; Platforms</h3>
+					<p>PostgreSQL</p>
+					<p>MongoDB</p>
 					<p>GCP</p>
-					<p>Github</p>
-					<p>Kaggle</p>
+					<p>Supabase</p>
+					<p>Git, Postman, Figma</p>
 				</div>
 			</div>
 		</div>

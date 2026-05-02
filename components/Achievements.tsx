@@ -18,6 +18,15 @@ const achievements = [
 		),
 	},
 	{
+		href: "https://dev.to/ashishk1331",
+		label: (
+			<>
+				<b className="font-medium">Tag Moderator</b> on Dev.to — curated 120+
+				JavaScript/React posts.
+			</>
+		),
+	},
+	{
 		href: "https://gdg.community.dev/gdg-on-campus-kamla-nehru-institute-of-technology-sultanpur-india/",
 		label: (
 			<>

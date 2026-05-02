@@ -20,7 +20,7 @@ export default function Projects() {
 				<div className="col-span-full md:col-span-4 flex flex-col items-start gap-12 text-sm">
 					{ProjectsItems.map((project, i) => (
 						<div key={i} className="flex flex-col items-start gap-2">
-							{project.images && (
+							{project.images && project.images.length > 0 && (
 								<div className="flex flex-wrap items-center gap-2">
 									{project.images.map((src) => (
 										<div

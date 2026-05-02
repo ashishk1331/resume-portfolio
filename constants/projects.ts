@@ -1,5 +1,23 @@
 export const ProjectsItems = [
 	{
+		title: "Seline",
+		date: "Mar 2026",
+		desc: "Architected a Go-based AI harness that executes agent workflows in isolated containers per user, with lifecycle-managed environments and scalable orchestration.",
+		stack: "TypeScript, NextJS, Go, Gin, Docker, PostgreSQL",
+		icon: "/logo/seline_logo.svg",
+		href: "https://meetseline.com",
+		images: [],
+	},
+	{
+		title: "Voodoo",
+		date: "Jan 2026",
+		desc: "Building an AI search and agent platform powered by diffusion LLMs, enabling parallel generation, multi-source search, and agentic workflows with real-time reasoning.",
+		stack: "TypeScript, NextJS, AI SDK, Convex, Better Auth",
+		icon: "/logo/default_logo.svg",
+		href: "https://usevoodoohq.com",
+		images: [],
+	},
+	{
 		title: "Altar",
 		date: "Jul 2025",
 		desc: "Created a microblogging app with real-time features, user profiles, and bookmarks using Supabase.",
