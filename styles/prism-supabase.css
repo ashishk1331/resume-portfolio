@@ -2,7 +2,7 @@
 code[class*="language-"],
 pre[class*="language-"] {
 	color: var(--color-foreground);
-	background: #1f1f1f;
+	background: var(--color-code-bg);
 	font-family: "Fira Code", "Fira Mono", monospace;
 	font-size: 0.9rem;
 	line-height: 1.6;
@@ -16,17 +16,22 @@ pre[class*="language-"] {
 	border-radius: 0;
 	border-bottom-left-radius: 0.75rem;
 	border-bottom-right-radius: 0.75rem;
-	border: 1px solid var(--color-highlight-border);
+	border: 2px solid var(--color-highlight-border);
+	border-top: none;
 	transition: background 0.2s ease-in-out;
 }
 
 .pre-div {
 	background: var(--color-highlight-border);
+	color: var(--color-eager-green);
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.053em;
 	padding: 0.5rem var(--color-editor-padding);
 	border-top-left-radius: 0.75rem;
 	border-top-right-radius: 0.75rem;
 	font-family: "Fira Code", "Fira Mono", monospace;
-	font-size: 0.9rem;
+	font-size: 0.75rem;
 }
 
 /* Inline <code> */

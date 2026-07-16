@@ -2,33 +2,190 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-	/* base colors */
-	--color-black-main: #121212;
-	--color-fore: #e0e0e0;
-	--color-accent: #10b981;
+	/* ── Duolingo palette ─────────────────────────────── */
+	--color-eager-green: #58cc02;
+	--color-eager-green-hover: #61e002;
+	--color-storybook-green: #d7ffb8;
+	--color-spark-blue: #1cb0f6;
+	--color-fresh-leaf: #a5ed6e;
+	--color-night-ink: #000437;
+	--color-paper-white: #ffffff;
+	--color-charcoal: #4b4b4b;
+	--color-pencil-gray: #777777;
+	--color-faded-gray: #afafaf;
 
-	/* code/editor colors */
+	/* semantic aliases used across the app */
+	--color-bg: #ffffff;
+	--color-fore: #4b4b4b;
+	--color-muted: #777777;
+	--color-accent: #58cc02;
+	--color-accent-hover: #61e002;
+	--color-link: #1cb0f6;
+	--color-border: #e5e5e5;
+
+	/* ── Type families ────────────────────────────────── */
+	/* feather → rounded display face; duolingo-sans → geometric sans */
+	--font-feather: var(--font-nunito), ui-rounded, "Nunito", system-ui, sans-serif;
+	--font-duolingo-sans: var(--font-nunito-sans), "Nunito Sans", ui-sans-serif,
+		system-ui, sans-serif;
+
+	/* ── Type scale ───────────────────────────────────── */
+	--text-caption: 13px;
+	--text-nav-label: 15px;
+	--text-body: 17px;
+	--text-subheading: 19px;
+	--text-heading-sm: 32px;
+	--text-heading: 48px;
+	--text-display: 64px;
+
+	/* ── Radii ────────────────────────────────────────── */
+	--radius-xl: 12px;
+
+	/* ── Code / editor tokens (light storybook surface) ─ */
+	--color-code-bg: #f7fdf1;
 	--color-editor-padding: 16px;
-	--color-foreground: #ededed;
-	--color-constant: #3ecf8e;
-	--color-string: #ededed;
-	--color-comment: #707070;
-	--color-keyword: #a0a0a0;
-	--color-parameter: #ededed;
-	--color-function: #3ecf8e;
-	--color-string-expression: #3ecf8e;
-	--color-punctuation: #ededed;
-	--color-link: #ededed;
-	--color-number: #ededed;
-	--color-property: #3ecf8e;
-	--color-highlight: #232323;
-	--color-highlight-border: #383838;
-	--color-highlight-hover: #1d1d1d;
-	--color-diff-deleted: #f06a50;
-	--color-diff-inserted: #3ecf8e;
-	--color-accent-hover: #34d399;
+	--color-foreground: #4b4b4b; /* base code text — charcoal */
+	--color-constant: #1899d6; /* constants, symbols, regex — deep blue */
+	--color-string: #4aad02; /* strings — deep green */
+	--color-comment: #afafaf; /* comments — faded gray */
+	--color-keyword: #000437; /* keywords, atrule — night ink */
+	--color-parameter: #4b4b4b; /* operators, variables */
+	--color-function: #1899d6; /* functions, class names — deep blue */
+	--color-string-expression: #4aad02;
+	--color-punctuation: #777777; /* punctuation — pencil gray */
+	--color-number: #1899d6;
+	--color-property: #4aad02; /* object/JSON keys — green */
+	--color-highlight: #eef7e4; /* inline code fill — light green wash */
+	--color-highlight-border: #d7ffb8; /* borders + label band — storybook green */
+	--color-highlight-hover: #eef7e4;
+	--color-diff-deleted: #ea2b2b; /* cardinal red — diff only */
+	--color-diff-inserted: #4aad02;
+}
+
+html {
+	background: var(--color-paper-white);
+}
+
+/* Wide blog content (tables) scrolls inside itself instead of the page */
+article.prose :where(table) {
+	display: block;
+	max-width: 100%;
+	overflow-x: auto;
 }
 
 body {
-	font-family: var(--font-barlow), sans-serif;
+	font-family: var(--font-duolingo-sans);
+	color: var(--color-charcoal);
+	background: var(--color-paper-white);
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Feather is a display face — reserve it for large headings */
+.font-feather {
+	font-family: var(--font-feather);
+	font-weight: 800;
+	letter-spacing: -0.02em;
+}
+
+/* Duolingo-style chunky button: flat fill + solid 3D bottom border */
+.duo-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	font-family: var(--font-duolingo-sans);
+	font-weight: 700;
+	font-size: 15px;
+	letter-spacing: 0.053em;
+	text-transform: uppercase;
+	border-radius: 12px;
+	padding: 12px 20px;
+	transition:
+		transform 0.08s ease,
+		filter 0.12s ease,
+		background 0.12s ease;
+	cursor: pointer;
+	text-decoration: none;
+}
+.duo-btn:active {
+	transform: translateY(2px);
+}
+
+.duo-btn--primary {
+	background: var(--color-eager-green);
+	color: var(--color-paper-white);
+	border: none;
+	box-shadow: 0 4px 0 0 #4aad02;
+}
+.duo-btn--primary:hover {
+	background: var(--color-eager-green-hover);
+}
+.duo-btn--primary:active {
+	box-shadow: 0 2px 0 0 #4aad02;
+}
+
+.duo-btn--ghost {
+	background: var(--color-paper-white);
+	color: var(--color-spark-blue);
+	border: 2px solid var(--color-faded-gray);
+	box-shadow: 0 4px 0 0 #e5e5e5;
+}
+.duo-btn--ghost:hover {
+	background: #f7f7f7;
+}
+.duo-btn--ghost:active {
+	box-shadow: 0 2px 0 0 #e5e5e5;
+}
+
+/* ── Playful motion ───────────────────────────────── */
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-12px);
+	}
+}
+.animate-float {
+	animation: float 5s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+	0%,
+	100% {
+		transform: rotate(-3deg);
+	}
+	50% {
+		transform: rotate(3deg);
+	}
+}
+
+/* Sticker card lift on hover */
+.pop-card {
+	transition:
+		transform 0.15s ease,
+		box-shadow 0.15s ease,
+		border-color 0.15s ease;
+}
+.pop-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 6px 0 0 #d7ffb8;
+	border-color: var(--color-eager-green);
+}
+
+/* Eyebrow chip above section titles */
+.eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.375rem;
+	border-radius: 12px;
+	border: 2px solid var(--color-faded-gray);
+	padding: 4px 12px;
+	font-family: var(--font-duolingo-sans);
+	font-weight: 700;
+	font-size: 13px;
+	letter-spacing: 0.053em;
+	text-transform: uppercase;
+	color: var(--color-spark-blue);
 }

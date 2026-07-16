@@ -49,8 +49,10 @@ export default async function Blog({
 	return (
 		<>
 			<div className="flex flex-col items-start gap-4 my-12">
-				<h1 className="text-2xl md:text-4xl font-bold">{metadata.title}</h1>
-				<div className="flex text-lg items-center gap-2 text-neutral-500">
+				<h1 className="font-feather text-eager-green text-[32px] md:text-[48px] leading-[1.1]">
+					{metadata.title}
+				</h1>
+				<div className="flex flex-wrap items-center gap-2 text-caption font-bold uppercase tracking-[0.053em] text-spark-blue">
 					<p>{metadata.author}</p>
 					<Dot size={16} />
 					<p>{format(metadata.pubDate, "MMMM d, yyyy")}</p>

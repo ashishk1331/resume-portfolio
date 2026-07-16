@@ -9,17 +9,21 @@ export default function Article({
 		<article
 			className={twMerge(
 				`
-    prose prose-lg prose-invert max-w-none
-    prose-headings:text-[var(--color-fore)]
-    prose-p:text-[var(--color-fore)]
-    prose-a:text-[var(--color-accent)] prose-a:no-underline prose-a:font-medium hover:prose-a:text-accent-hover
-    prose-blockquote:border-l-4 prose-blockquote:border-constant prose-blockquote:text-fore
-    prose-strong:text-[var(--color-fore)]
-    prose-code:text-[var(--color-accent)] prose-code:bg-[var(--color-highlight)] prose-code:px-2 prose-code:py-0.5 prose-code:rounded-md
-    prose-pre:bg-[var(--color-black-main)] prose-pre:text-[var(--color-fore)] prose-pre:rounded-lg prose-pre:p-4
-    prose-ol:text-[var(--color-fore)] prose-ul:text-[var(--color-fore)]
-    prose-li:marker:text-[var(--color-accent)]
-    prose-hr:border-[var(--color-accent)]
+    prose prose-lg max-w-none
+    prose-headings:font-bold prose-headings:text-charcoal
+    prose-h1:font-feather prose-h1:text-eager-green
+    prose-h2:text-eager-green
+    prose-p:text-pencil-gray
+    prose-a:text-spark-blue prose-a:no-underline prose-a:font-bold hover:prose-a:underline
+    prose-blockquote:border-l-4 prose-blockquote:border-eager-green prose-blockquote:text-charcoal prose-blockquote:not-italic
+    prose-strong:text-charcoal prose-strong:font-bold
+    prose-em:text-charcoal
+    prose-code:text-eager-green prose-code:bg-[var(--color-highlight)] prose-code:px-2 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none
+    prose-pre:bg-[var(--color-code-bg)] prose-pre:text-[var(--color-foreground)] prose-pre:rounded-xl prose-pre:p-4
+    prose-ol:text-pencil-gray prose-ul:text-pencil-gray
+    prose-li:marker:text-eager-green
+    prose-hr:border-border
+    prose-img:rounded-xl
   `,
 				className,
 			)}

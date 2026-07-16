@@ -1,47 +1,74 @@
+import { Boxes, Database, Smartphone, Terminal } from "lucide-react";
+import Section from "./Section";
+
+const skillGroups = [
+	{
+		title: "Languages",
+		icon: Terminal,
+		items: ["TypeScript", "Python", "Go", "SQL"],
+	},
+	{
+		title: "Backend & Systems",
+		icon: Boxes,
+		items: ["Node.js", "FastAPI", "Gin", "Docker", "REST APIs"],
+	},
+	{
+		title: "Frontend & Mobile",
+		icon: Smartphone,
+		items: [
+			"NextJS",
+			"React Native",
+			"Expo",
+			"React Query",
+			"Zustand",
+			"Reanimated",
+		],
+	},
+	{
+		title: "Databases & Platforms",
+		icon: Database,
+		items: ["PostgreSQL", "MongoDB", "GCP", "Supabase", "Git", "Figma"],
+	},
+];
+
 export default function Skills() {
 	return (
-		<div className="grid grid-cols-6 gap-8 p-2">
-			<div className="col-span-full md:col-span-2 md:text-right">
-				<a href="#skills">
-					<h3 className="font-medium text-lg">Skills</h3>
-				</a>
+		<Section
+			id="skills"
+			eyebrow="Toolbox"
+			title="my skill tree"
+			subtitle="The stack I reach for when turning an idea into something real."
+		>
+			<div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+				{skillGroups.map((group) => {
+					const Icon = group.icon;
+					return (
+						<div
+							key={group.title}
+							className="pop-card rounded-2xl border-2 border-border bg-paper-white p-5"
+						>
+							<div className="flex items-center gap-2 mb-3">
+								<span className="grid place-items-center size-9 rounded-xl bg-storybook-green text-eager-green">
+									<Icon size={18} />
+								</span>
+								<h3 className="font-bold text-charcoal text-body">
+									{group.title}
+								</h3>
+							</div>
+							<div className="flex flex-wrap gap-2">
+								{group.items.map((item) => (
+									<span
+										key={item}
+										className="rounded-xl bg-storybook-green px-3 py-1 text-caption font-bold text-eager-green"
+									>
+										{item}
+									</span>
+								))}
+							</div>
+						</div>
+					);
+				})}
 			</div>
-			<div className="col-span-full md:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-start gap-1 text-sm">
-				<div className="flex flex-col items-start">
-					<h3 className="font-medium text-lg mb-2">Languages</h3>
-					<p>TypeScript</p>
-					<p>Python</p>
-					<p>Go</p>
-					<p>SQL</p>
-				</div>
-
-				<div className="flex flex-col items-start">
-					<h3 className="font-medium text-lg mb-2">Backend &amp; Systems</h3>
-					<p>Node.js</p>
-					<p>FastAPI</p>
-					<p>Gin</p>
-					<p>Docker</p>
-					<p>REST APIs</p>
-				</div>
-
-				<div className="flex flex-col items-start">
-					<h3 className="font-medium text-lg mb-2">Frontend &amp; Mobile</h3>
-					<p>NextJS</p>
-					<p>React Native, Expo</p>
-					<p>React Query</p>
-					<p>Zustand</p>
-					<p>Reanimated</p>
-				</div>
-
-				<div className="flex flex-col items-start">
-					<h3 className="font-medium text-lg mb-2">Databases &amp; Platforms</h3>
-					<p>PostgreSQL</p>
-					<p>MongoDB</p>
-					<p>GCP</p>
-					<p>Supabase</p>
-					<p>Git, Postman, Figma</p>
-				</div>
-			</div>
-		</div>
+		</Section>
 	);
 }

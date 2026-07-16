@@ -1,5 +1,5 @@
 import { ChevronRight } from "lucide-react";
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 
 type BreadcrumbsProps = {
 	items: { id: string; label: ReactNode; href: string }[];
@@ -14,7 +14,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
 			collection.push(
 				<span
 					key={id}
-					className="inline-flex text-left gap-1 items-center text-neutral-400 no-underline font-normal"
+					className="inline-flex text-left gap-1 items-center text-charcoal no-underline font-bold"
 				>
 					{label}
 				</span>,
@@ -25,7 +25,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
 					key={id}
 					href={href}
 					rel="noopener noreferrer"
-					className="inline-flex text-left gap-1 items-center text-neutral-400 no-underline font-normal"
+					className="inline-flex text-left gap-1 items-center text-spark-blue no-underline font-bold hover:underline"
 				>
 					{label}
 				</a>,
@@ -36,7 +36,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
 				<ChevronRight
 					key={id + i}
 					size={16}
-					className="inline-block align-middle text-neutral-400 mx-1"
+					className="inline-block align-middle text-faded-gray mx-1"
 				/>,
 			);
 	}

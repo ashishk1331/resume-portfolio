@@ -6,14 +6,16 @@ export default function MegaBlogs() {
 
 	return (
 		<>
-			<div className="w-full flex flex-col items-left gap-4 mb-12">
-				<h1 className="text-3xl md:text-4xl font-bold">Blogs</h1>
-				<span>
-					Ashish reads, implements and share. Sometimes it&apos;s too hard to
-					not share.
-				</span>
+			<div className="w-full flex flex-col items-start gap-3 mb-12">
+				<h1 className="font-feather text-eager-green text-[40px] md:text-[56px] leading-[1.1]">
+					blogs.
+				</h1>
+				<p className="text-body text-pencil-gray">
+					Ashish reads, implements and shares. Sometimes it&apos;s too hard not
+					to.
+				</p>
 			</div>
-			<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-stretch">
+			<div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-stretch">
 				{blogs.map((blog) => (
 					<BlogPost key={blog.slug} blog={blog} />
 				))}

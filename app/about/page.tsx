@@ -1,15 +1,15 @@
-import Article from "@/components/blocks/Article";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import Article from "@/components/blocks/Article";
 
 export default function About() {
 	return (
 		<Article className="max-w-2xl mx-auto">
 			<Link
 				href="/"
-				className="flex items-center gap-2 mb-12 border-2 border-neutral-800 px-3 py-1 rounded cursor-pointer active:scale-90 transition no-underline w-fit font-normal"
+				className="flex items-center gap-2 mb-12 border-2 border-faded-gray text-spark-blue px-4 py-2 rounded-xl cursor-pointer active:translate-y-0.5 transition no-underline w-fit font-bold uppercase tracking-[0.053em] text-nav-label"
 			>
-				<ArrowLeft size={16} className="text-accent" />
+				<ArrowLeft size={16} />
 				<span>Go Back</span>
 			</Link>
 

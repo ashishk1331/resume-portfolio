@@ -1,36 +1,40 @@
 "use client";
 
 import { ExternalLink } from "lucide-react";
-import Image from "next/image";
-import { ProjectsItems } from "@/constants/projects";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { useState } from "react";
+import { ProjectsItems } from "@/constants/projects";
+import Section from "./Section";
 
 export default function Projects() {
 	const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
 	return (
 		<>
-			<div className="grid grid-cols-6 gap-8 p-2">
-				<div className="col-span-full md:col-span-2 md:text-right">
-					<a href="#projects">
-						<h3 className="font-medium text-lg">Projects</h3>
-					</a>
-				</div>
-				<div className="col-span-full md:col-span-4 flex flex-col items-start gap-12 text-sm">
-					{ProjectsItems.map((project, i) => (
-						<div key={i} className="flex flex-col items-start gap-2">
+			<Section
+				id="projects"
+				eyebrow="Built with love"
+				title="things i've shipped"
+				subtitle="A mixed bag of products, experiments and dev tools — pick one and poke around."
+			>
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+					{ProjectsItems.map((project) => (
+						<div
+							key={project.title}
+							className="pop-card flex flex-col rounded-2xl border-2 border-border bg-paper-white p-5"
+						>
 							{project.images && project.images.length > 0 && (
-								<div className="flex flex-wrap items-center gap-2">
-									{project.images.map((src) => (
+								<div className="flex flex-wrap items-center gap-2 mb-4">
+									{project.images.slice(0, 4).map((src) => (
 										<div
 											key={src}
-											className="size-24 aspect-square overflow-hidden rounded-md flex items-center justify-around"
+											className="size-16 aspect-square overflow-hidden rounded-xl flex items-center justify-around"
 										>
 											<motion.img
 												src={src}
 												layoutId={src}
-												alt="tetrapack-banner"
+												alt={project.title}
 												className="h-full w-full object-cover cursor-pointer"
 												onClick={() => setSelectedImage(src)}
 											/>
@@ -40,45 +44,52 @@ export default function Projects() {
 							)}
 							<a
 								href={project.href}
-								className="flex items-center gap-2 hover:underline"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="group flex items-center gap-2"
 							>
-								<Image
-									alt={project.title}
-									src={project.icon}
-									width={128}
-									height={128}
-									className="size-5 aspect-square rounded"
-								/>
-								<h3 className="font-medium text-lg">{project.title}</h3>
-								<h3 className="text-lg text-accent">{project.date}</h3>
-								<ExternalLink size={12} className="text-accent mt-0.5" />
+								<span className="grid place-items-center rounded shrink-0 overflow-hidden">
+									<Image
+										alt={project.title}
+										src={project.icon}
+										width={128}
+										height={128}
+										className="size-6"
+									/>
+								</span>
+								<h3 className="min-w-0 text-subheading font-bold text-charcoal group-hover:text-spark-blue transition-colors">
+									{project.title}
+								</h3>
+								<ExternalLink size={14} className="text-spark-blue shrink-0" />
+								<span className="ml-auto rounded-xl bg-storybook-green px-2.5 py-0.5 text-caption font-bold uppercase tracking-[0.053em] text-eager-green shrink-0">
+									{project.date}
+								</span>
 							</a>
-							<p>{project.desc}</p>
-							<div className="flex items-center gap-1 text-accent">
-								<p>{project.stack}</p>
-							</div>
+							<p className="mt-3 text-pencil-gray flex-1">{project.desc}</p>
+							<p className="mt-4 text-caption font-bold uppercase tracking-[0.053em] text-spark-blue">
+								{project.stack}
+							</p>
 						</div>
 					))}
 				</div>
-			</div>
+			</Section>
+
 			<AnimatePresence>
 				{selectedImage && (
-					<>
-						<motion.div
-							className="fixed inset-0 w-full h-full bg-black/80 z-50 flex items-center justify-center"
-							onClick={() => setSelectedImage(null)}
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-						>
-							<motion.img
-								src={selectedImage}
-								alt={`Full Image of ${selectedImage}`}
-								layoutId={selectedImage}
-								className="max-w-[90vw] max-h-[90vh] rounded-md"
-							/>
-						</motion.div>
-					</>
+					<motion.div
+						className="fixed inset-0 w-full h-full bg-night-ink/80 z-50 flex items-center justify-center p-6"
+						onClick={() => setSelectedImage(null)}
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+					>
+						<motion.img
+							src={selectedImage}
+							alt={`Preview of ${selectedImage}`}
+							layoutId={selectedImage}
+							className="max-w-[90vw] max-h-[90vh] rounded-2xl"
+						/>
+					</motion.div>
 				)}
 			</AnimatePresence>
 		</>

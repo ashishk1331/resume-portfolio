@@ -1,21 +1,25 @@
 import Achievements from "@/components/Achievements";
 import Blogs from "@/components/Blogs";
-import Education from "@/components/Education";
-import Experience from "@/components/Experience";
-import Introduction from "@/components/Introduction";
+import Journey from "@/components/Journey";
 import LandingBanner from "@/components/LandingBanner";
 import Projects from "@/components/Projects";
+import Section from "@/components/Section";
 import Skills from "@/components/Skills";
 
 export default function Home() {
 	return (
 		<>
 			<LandingBanner />
-			<Introduction />
-			<Experience />
+			<Section
+				id="journey"
+				eyebrow="The path so far"
+				title="my journey"
+				subtitle="Every checkpoint — from classrooms to codebases — that got me here."
+			>
+				<Journey />
+			</Section>
 			<Projects />
 			<Skills />
-			<Education />
 			<Achievements />
 			<Blogs />
 		</>
