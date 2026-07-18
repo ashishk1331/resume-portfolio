@@ -8,9 +8,9 @@ hasAudio: false
 banner: ./assets/turning-duolingo-screenshots-into-flashcards-with-paddleocr/banner.webp
 ---
 
-I've been doing duolingo since 2024. So 2 years till now. I started out practising English, and then found craze for learning Japanese. (Not a brag but) I broke my 365+ days streak and shifted to books and other resources, and it failed miserably. If nothing, duolingo made a habit for learning. Hence, I came back on it. At the time of writing this post, I've a streak of 345 days. Past few days I've been on and off. Wasted many streak freezes, yet I'm standing here. Bottom line is duolingo helped me create a habit of showing up regularly for lessons.
+I've been doing duolingo since 2024. So 2 years till now. I started out practising English, and then found craze for learning Japanese. (Not a brag but) I broke my 365+ days streak and shifted to books and other resources, and it failed miserably. If nothing, duolingo made a habit for learning. Hence, I came back on it. At the time of writing this post, I've a streak of 345 days. For past few days I've been on and off. Wasted many streak freezes, yet I'm standing here. Bottom line is duolingo helped me create a habit of showing up regularly for lessons.
 
-Additonaly, I have a habit of downloading images of the questions and trivia. I use them to practice writing japanese. Putting in effort to memorize the kanji. This habit helped me collect 776 images. Then it hit why not extract the translations from the card and create a database or bare csv out of them? Then I can use this data 
+Additonaly, I have a habit of downloading images of the questions and trivia. I use them to practice writing japanese. Putting in effort to memorize the kanji. This habit helped me collect 776 images. Then it hit me why not extract the translations from the card and create a database or bare csv? Afterwards, I can use this data 
 
 - to create flashcards, 
 - daily quizzes using time-spaced method based on the creation timestamp on the images or 
@@ -20,13 +20,13 @@ Additonaly, I have a habit of downloading images of the questions and trivia. I 
 
 ## Extraction
 
-I wanted to try out a lightweight OCR or vision model to extract the text from the images. Lightweight will be the hard constraint because in words of huggingface, [I am GPU poor](https://huggingface.co/ashishk1331). My machine has GTX 1650 4GB VRAM. Hence, GPU poor. I started looking for options like dots ocr, mistral ocr and more from the huggingface ocr leaderboard. Then I cam across [paddle ocr blog on huggingface](https://huggingface.co/blog/PaddlePaddle/pp-ocrv6), that they released v6. I tried it out in their playground and it worked surprisingly well. So, I thought why not simply use this.
+I wanted to try out a lightweight OCR or vision model to extract the text from the images. Lightweight would be the hard constraint because in words of huggingface, [I am GPU poor](https://huggingface.co/ashishk1331). My machine has a GTX 1650 graphics card with 4GB VRAM. Hence, GPU poor. I started looking for options like dots ocr, mistral ocr and more from the huggingface ocr leaderboard. Then I cam across [paddle ocr blog on huggingface](https://huggingface.co/blog/PaddlePaddle/pp-ocrv6), that they released v6. I tried it out in their playground and it worked surprisingly well. So, I thought why not simply use this.
 
 [Here is the compilation of my experiments with PaddleOCRv6.](/assets/turning-duolingo-screenshots-into-flashcards-with-paddleocr/experiments.jpg)
 
 I read the documentation for PaddleOCR, which BTW was difficult to work with. Tried setting up the example code. Ran it. Found issues. Asked claude about it. Copy pasted some changes. Tried again. It worked.
 
-Then I write down a small python scripts which reads the input directory, finds all images, parse each image using the PaddleOCR detection and recognition halves and finally append the translation to a jsonl file. Here is a sample line from the jsonl file. It is an object of "ID", which also serves as backreference to the input image and primary key for the data line, and array of text found in the image. I stored raw text on purpose, talked about it later.
+Then I write down a small python scripts which reads the input directory, finds all images, parse each image using the PaddleOCR detection and recognition halves and finally append the extracted text pieces to a jsonl file. Here is a sample line from the jsonl file. It is an object of "ID", which also serves as backreference to the input image and primary key for the data line, and array of text found in the image. I stored raw text on purpose, talked about it later.
 
 ```json
 {
@@ -46,7 +46,7 @@ Also, this is how the annotation image turned out. It is beautiful.
 
 ![Sample annotation for image 1768977460](./assets/turning-duolingo-screenshots-into-flashcards-with-paddleocr/sample-annotation.png)
 
-Once this worked out for one image, I ran it on entire set. All workload was on CPU and it took around ~8 seconds to run for 1 image. Summing it all, it took roughly 1 hour and 45 minutes to complete all 776 images. I ran the entire experiment in two days in two halves. I consider the inputs at the cleanest level of inputs that a model could get, hence I assume 0 error rate. I compiled all annotated images into one single gaint image which you can view below.
+Once this worked out for one image, I ran it on entire set. All workload was on CPU and it took around ~8 seconds to run for 1 image. Summing it all, it took roughly 1 hour and 45 minutes to complete all 776 images. I ran the entire experiment across two days in two halves. I consider the inputs to be clean, which should pull the error rate from the model to 0. I compiled all annotated images into one single gaint image which you can view below.
 
 [Here is the entire set of transcripts for the 776 images](/assets/turning-duolingo-screenshots-into-flashcards-with-paddleocr/transcripts-256w.jpg)
 
@@ -54,27 +54,33 @@ Once this worked out for one image, I ran it on entire set. All workload was on 
 
 ## AI Verifier and Structured Output
 
-But I believe there two things missing from the equation namely (1) the verifier model and (2) structured outputs. Let me explain.
+But I believe there two things missing from the equation namely 
 
-As I previously stated that I assume 0 error rate, this assumption can lead to problems later down the line. I could be confident about the corrupted data and happily feed the same into other sinks. One important lesson is that always take the output of probabilistic models with grain of salt. Them not making mistakes do not signals they can't make mistakes. Hence, a verifier model should be used in such conditions. Being a fan of sLLM and liquid AI's work, I would prefer using the LFM 2.5 for this task it is small and is trained on eng and jp datasets. Plus, this task is highly focused and falls under the domain of text sumamrization. So, then the pipeline would look like `OCR -> LLM -> JSONL`. A simple system prompt can suffice here. No tool caling required.
+1. a verifier model and 
+2. structured outputs. 
 
-Now the above setup moves use to the second point which is structured outputs. We can instruct the verifier to always give structured output which in turn would help store the data in more meaningful way and strip away the noises like the "duolingo" suffix stemming from the right corner of every input image. Another anamoly was the recurring "11" number in the raw text which if you look at the above image came from the drawstrings of the junior in the input image. We can add further instructions to only capture the transcript pairs and leave out other texts. This was we would get high signal data which prepped to be thrown at any other sink like notebookLM.
+Let me explain.
+
+As I previously stated that I expect 0 error rate, this expectation can lead to problems later down the line. I could be confident about the corrupted data and happily feed the same into other sinks. One important lesson is that always take the output of probabilistic models with a grain of salt. Models not making mistakes do not signal they can't make mistakes. Hence, a verifier model should be used in such conditions. Being a fan of sLLM and liquid AI's work, I would prefer using the LFM 2.5 for this task. It is small and trained on eng and jp datasets, unlike smol-LM 3 (which is also a great model). Plus, this task is highly focused and falls under the domain of text sumamrization. So, then the pipeline would look like `OCR -> LLM -> JSONL`. A simple system prompt can suffice here. No tool caling required.
+
+Now the structured outputs. We can instruct the verifier to always give structured output which in turn would help store the data in more meaningful way and strip away the noises like the "duolingo" suffix stemming from the right corner of every input image. Another anamoly was the recurring "11" number in the raw text which came from the drawstrings of the junior's hoodie in the input images. We can add further instructions to only capture the transcript pairs and leave out all other text pieces. This way we would get high signal data which is prepped to be thrown at any other sink like notebookLM.
 
 Then our object would like like
 
-```json
-{
-    "ID": "1768977460", 
-    "jp": "あそこでバスにのりましょうか。", 
-    "eng": "Should we get on the bus over there?", 
-}
+```py
+from pydantic import BaseModel
+
+class DuolingoEntry(BaseModel):
+    ID: str
+    jp: str
+    eng: str
 ```
 
 ---
 
 ## Touched grass
 
-Next day I went out and touched some grass. It made realize that we do not need a complex LLM recognition here. If I convert the characters to ascii (or specifically unicode here) we can segregate the sentences captured in the `texts`. Also, we already know that each `texts` property will contain text "duolingo" at the last index and might contain text "11" from the junior image parsing. Hence, this is actually a simple confing problem nothing related to complex LLM text summarization problem.
+Next day I went out and touched some grass. It made me realize that we do not need a complex LLM pipeline. If I convert the characters to unicode, we can segregate the sentences captured in the `texts` into jp and eng bins. Also, we already know that each `texts` array will contain text "duolingo" at the last index and might contain text "11" from the junior image parsing before that. Hence, this is actually a simple coding problem and not related to complex LLM text summarization problem.
 
 For the eliminating the "duolingo" and "11" text from the sequence, we can simply skip these words while parsing. Treating them as stop-words for our vocabulary.
 
@@ -83,13 +89,13 @@ if line in ["duolingo", "11"]:
     continue
 ```
 
-And for detecting the jp phrases from the english ones, we can use unicode comparision. Claude gave me the exact range and conditions.
+And for detecting the jp phrases from the english ones, we can use unicode comparision. Claude gave me the exact range and condition.
 
 ```py
 '\u3040' <= c <= '\u30ff' or '\u4e00' <= c <= '\u9fff'
 ```
 
-These two conditions helped to sanitize the entire data. No ollama. No LFM. Also, I've attached the complete file including all 776 examples.
+These two conditions helped to sanitize the entire data. No ollama. No LFM. Also, I've attached the complete file including all 776 examples. Also, this object is in the shape we discussed in the previous section.
 
 ```json
 {
