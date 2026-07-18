@@ -16,6 +16,10 @@ Additonaly, I have a habit of downloading images of the questions and trivia. I 
 - daily quizzes using time-spaced method based on the creation timestamp on the images or 
 - even better throw this data "as context" on notebookLM and let it generate all flash cards and quizzes for me.
 
+---
+
+## Extraction
+
 I wanted to try out a lightweight OCR or vision model to extract the text from the images. Lightweight will be the hard constraint because in words of huggingface, [I am GPU poor](https://huggingface.co/ashishk1331). My machine has GTX 1650 4GB VRAM. Hence, GPU poor. I started looking for options like dots ocr, mistral ocr and more from the huggingface ocr leaderboard. Then I cam across [paddle ocr blog on huggingface](https://huggingface.co/blog/PaddlePaddle/pp-ocrv6), that they released v6. I tried it out in their playground and it worked surprisingly well. So, I thought why not simply use this.
 
 [Here is the compilation of my experiments with PaddleOCRv6.](/assets/turning-duolingo-screenshots-into-flashcards-with-paddleocr/experiments.jpg)
@@ -46,6 +50,10 @@ Once this worked out for one image, I ran it on entire set. All workload was on 
 
 [Here is the entire set of transcripts for the 776 images](/assets/turning-duolingo-screenshots-into-flashcards-with-paddleocr/transcripts-256w.jpg)
 
+---
+
+## AI Verifier and Structured Output
+
 But I believe there two things missing from the equation namely (1) the verifier model and (2) structured outputs. Let me explain.
 
 As I previously stated that I assume 0 error rate, this assumption can lead to problems later down the line. I could be confident about the corrupted data and happily feed the same into other sinks. One important lesson is that always take the output of probabilistic models with grain of salt. Them not making mistakes do not signals they can't make mistakes. Hence, a verifier model should be used in such conditions. Being a fan of sLLM and liquid AI's work, I would prefer using the LFM 2.5 for this task it is small and is trained on eng and jp datasets. Plus, this task is highly focused and falls under the domain of text sumamrization. So, then the pipeline would look like `OCR -> LLM -> JSONL`. A simple system prompt can suffice here. No tool caling required.
@@ -62,4 +70,37 @@ Then our object would like like
 }
 ```
 
-For the next time, I'll report back on the success of the above mentioned pipeline. With this experiment I wanted to try out open source models and which can run only local hardware. Recently, I read the article on [release of bonsai 27B](https://prismml.com/news/bonsai-27b) and it startled me because of the low memory requirement to intelligence ratio it has. Future belongs to the smarter, open and lightweight models.
+---
+
+## Touched grass
+
+Next day I went out and touched some grass. It made realize that we do not need a complex LLM recognition here. If I convert the characters to ascii (or specifically unicode here) we can segregate the sentences captured in the `texts`. Also, we already know that each `texts` property will contain text "duolingo" at the last index and might contain text "11" from the junior image parsing. Hence, this is actually a simple confing problem nothing related to complex LLM text summarization problem.
+
+For the eliminating the "duolingo" and "11" text from the sequence, we can simply skip these words while parsing. Treating them as stop-words for our vocabulary.
+
+```py
+if line in ["duolingo", "11"]:
+    continue
+```
+
+And for detecting the jp phrases from the english ones, we can use unicode comparision. Claude gave me the exact range and conditions.
+
+```py
+'\u3040' <= c <= '\u30ff' or '\u4e00' <= c <= '\u9fff'
+```
+
+These two conditions helped to sanitize the entire data. No ollama. No LFM. Also, I've attached the complete file including all 776 examples.
+
+```json
+{
+    "ID": "1768977460", 
+    "jp": "あそこでバスにのりましょうか。", 
+    "eng": "Should we get on the bus over there?", 
+}
+```
+
+[All translations as text file](https://raw.githubusercontent.com/ashishk1331/duolingo-ocr/refs/heads/master/exercises.txt)
+
+Now this flip in the pipeline teaches us an important lesson which can be easily summarized by the idiom "If all you've a hammer, everything looks like a nail." The modern LLMs can handle any text you throw in their face, even with grace. But this does not mean that on every opening, you should pick a LLM to do the work. Weigh the inputs initial state and complexity of transition from raw text to sanitized text. A good rule would be to count the number of edge cases you need to handle. If this number keeps on changing ("incrementing"), pick an LLM else code the conditions. However, LLMs can be used to assess the input data and the output state required to explore the edge cases and help you pick the correct route.
+
+Is this some disorder AI-pilled people pick up at some point? Talking about my preference for LLMs, instead of looking out for simpler and elegant solutions.

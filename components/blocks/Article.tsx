@@ -19,7 +19,7 @@ export default function Article({
     prose-pre:bg-[var(--color-black-main)] prose-pre:text-[var(--color-fore)] prose-pre:rounded-lg prose-pre:p-4
     prose-ol:text-[var(--color-fore)] prose-ul:text-[var(--color-fore)]
     prose-li:marker:text-[var(--color-accent)]
-    prose-hr:border-[var(--color-accent)]
+    wavy-hr
   `,
 				className,
 			)}
