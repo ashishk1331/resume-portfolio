@@ -7,10 +7,13 @@ Every route is statically generated.
 
 ## Development
 
+This project uses **bun** — `bun.lock` is the committed lockfile. Running
+`npm install` here creates a competing `package-lock.json`, so stick to bun.
+
 ```bash
-npm install
-npm run dev     # http://localhost:3000
-npm run build   # production build
+bun install
+bun run dev     # http://localhost:3000
+bun run build   # production build
 ```
 
 ## Layout
