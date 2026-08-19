@@ -1,49 +1,96 @@
+/* biome-ignore-all lint/complexity/noImportantStyles: the reduced-motion reset
+   at the bottom of this file has to beat every animation and transition
+   declared anywhere on the page. */
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
 @theme {
-	/* base colors */
-	--color-black-main: #121212;
-	--color-fore: #e0e0e0;
-	--color-accent: #10b981;
+	/* Blue ink on pale paper. The whole page is drawn in one hue — emphasis
+	   comes from italics, size and space rather than from a second colour. */
+	--color-paper: #efefff;
+	--color-surface: #e6e6fb;
+	--color-border: #d8d8f4;
+	--color-border-strong: #b6b6e6;
 
-	/* code/editor colors */
+	--color-ink: #2020db;
+	--color-muted: #4c4ca0;
+	--color-faint: #6161b2;
+
+	/* Same blue; named separately so links and states stay easy to retune. */
+	--color-accent: #2020db;
+	--color-accent-hover: #1414a8;
+
+	--font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+	--font-mono: var(--font-mono-code), ui-monospace, "SF Mono", monospace;
+
+	/* Code sits in a dark slab so it reads as a plate set into the page. */
 	--color-editor-padding: 16px;
-	--color-foreground: #ededed;
-	--color-constant: #3ecf8e;
-	--color-string: #ededed;
-	--color-comment: #707070;
-	--color-keyword: #a0a0a0;
-	--color-parameter: #ededed;
-	--color-function: #3ecf8e;
-	--color-string-expression: #3ecf8e;
-	--color-punctuation: #ededed;
-	--color-link: #ededed;
-	--color-number: #ededed;
-	--color-property: #3ecf8e;
-	--color-highlight: #232323;
-	--color-highlight-border: #383838;
-	--color-highlight-hover: #1d1d1d;
-	--color-diff-deleted: #f06a50;
-	--color-diff-inserted: #3ecf8e;
-	--color-accent-hover: #34d399;
+	--color-code-bg: #16163a;
+	--color-foreground: #e6e6fb;
+	--color-constant: #7cd4fd;
+	--color-string: #e6e6fb;
+	--color-comment: #8a8ac0;
+	--color-keyword: #a79bf5;
+	--color-parameter: #e6e6fb;
+	--color-function: #7cd4fd;
+	--color-string-expression: #7cd4fd;
+	--color-punctuation: #c9c9e8;
+	--color-link: #e6e6fb;
+	--color-number: #e6e6fb;
+	--color-property: #7cd4fd;
+	--color-highlight: #e6e6fb;
+	--color-highlight-border: #2b2b5c;
+	--color-highlight-hover: #1d1d48;
+	--color-diff-deleted: #ff8a73;
+	--color-diff-inserted: #7cd4fd;
 }
 
-body {
-	font-family: var(--font-barlow), sans-serif;
+@layer base {
+	html {
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		font-family: var(--font-serif);
+	}
+
+	::selection {
+		background-color: color-mix(in srgb, var(--color-ink) 18%, transparent);
+	}
+
+	/* One focus treatment everywhere, so keyboard users get the same affordance
+	   on links, buttons and cards. */
+	:focus-visible {
+		outline: 2px solid var(--color-ink);
+		outline-offset: 3px;
+		border-radius: 2px;
+	}
+
+	:where(h1, h2, h3, h4) {
+		text-wrap: balance;
+	}
+}
+
+/* Small uppercase column headings, as used across the masthead and sections. */
+.eyebrow {
+	font-family: var(--font-mono);
+	font-size: 0.7rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--color-faint);
 }
 
 /*
  * Wavy <hr> divider.
  * CSS has no `border-style: wavy`, so the wave is an SVG mask over a solid
- * fill — that way the colour still comes from --color-accent instead of
- * being baked into a background-image data URI.
+ * fill — that way the colour still comes from a token instead of being baked
+ * into a background-image data URI.
  */
 .wavy-hr hr {
 	border: 0;
 	height: 12px;
-	margin: 6rem 0;
-	background-color: var(--color-accent);
+	margin: 4rem 0;
+	background-color: var(--color-border-strong);
 	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='12' viewBox='0 0 40 12'%3E%3Cpath d='M0 6 Q5 0 10 6 T20 6 T30 6 T40 6' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
 	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='12' viewBox='0 0 40 12'%3E%3Cpath d='M0 6 Q5 0 10 6 T20 6 T30 6 T40 6' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
 	-webkit-mask-repeat: repeat-x;
@@ -52,4 +99,34 @@ body {
 	mask-size: 40px 12px;
 	-webkit-mask-position: center;
 	mask-position: center;
+}
+
+/* Entrance animation: one fade-and-rise. Anything that opts in must be
+   readable with the animation removed. */
+@media (prefers-reduced-motion: no-preference) {
+	.rise {
+		animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+	}
+}
+
+@keyframes rise {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }

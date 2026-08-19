@@ -1,6 +1,8 @@
 import { format } from "date-fns";
-import { Dot } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
 import rehypePrismPlus from "rehype-prism-plus";
@@ -9,6 +11,7 @@ import { getAllBlogsSlug, getBlogContent } from "@/lib/blogUtil";
 import "@/styles/prism-supabase.css";
 import type { HTMLAttributes, ImgHTMLAttributes } from "react";
 import Article from "@/components/blocks/Article";
+import { site } from "@/constants/site";
 
 const CustomImage = ({ src, alt }: ImgHTMLAttributes<HTMLImageElement>) => {
 	if (!src) return null;
@@ -20,10 +23,21 @@ const CustomImage = ({ src, alt }: ImgHTMLAttributes<HTMLImageElement>) => {
 			alt={alt || ""}
 			width={800}
 			height={400}
-			className="w-full h-auto object-cover rounded"
+			className="h-auto w-full border border-border object-cover"
 		/>
 	);
 };
+
+/** Markdown tables can be wider than a phone; give them their own scroller so
+ *  they never widen the page itself. */
+const CustomTable = ({
+	children,
+	...props
+}: HTMLAttributes<HTMLTableElement>) => (
+	<div className="-mx-1 overflow-x-auto px-1">
+		<table {...props}>{children}</table>
+	</div>
+);
 
 const CustomPre = ({ children, ...props }: HTMLAttributes<HTMLPreElement>) => {
 	const languageMatch = props.className?.match(/language-(\w+)/);
@@ -37,32 +51,104 @@ const CustomPre = ({ children, ...props }: HTMLAttributes<HTMLPreElement>) => {
 	);
 };
 
-export default async function Blog({
-	params,
-}: {
-	params: Promise<{ slug: string }>;
-}) {
+/** Derived from the post itself — not a number anyone typed in. */
+function readingTime(content: string) {
+	const words = content.trim().split(/\s+/).length;
+	return Math.max(1, Math.round(words / 220));
+}
+
+type Params = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+	const { slug } = await params;
+	const blog = getBlogContent(slug);
+	if (!blog) return {};
+
+	const { metadata } = blog;
+	const image = `/assets/${slug}/banner.webp`;
+
+	return {
+		title: metadata.title,
+		description: metadata.description,
+		alternates: { canonical: `/blog/${slug}` },
+		openGraph: {
+			type: "article",
+			title: metadata.title,
+			description: metadata.description,
+			url: `/blog/${slug}`,
+			publishedTime: new Date(metadata.pubDate).toISOString(),
+			authors: [metadata.author ?? site.name],
+			images: [{ url: image }],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: metadata.title,
+			description: metadata.description,
+			images: [image],
+		},
+	};
+}
+
+export default async function Blog({ params }: Params) {
 	const { slug } = await params;
 	const blog = getBlogContent(slug);
 	if (!blog) return notFound();
+
 	const { metadata, content } = blog;
+	const minutes = readingTime(content);
+
+	const articleSchema = {
+		"@context": "https://schema.org",
+		"@type": "BlogPosting",
+		headline: metadata.title,
+		description: metadata.description,
+		datePublished: new Date(metadata.pubDate).toISOString(),
+		author: { "@type": "Person", name: metadata.author ?? site.name },
+		image: `${site.url}/assets/${slug}/banner.webp`,
+		url: `${site.url}/blog/${slug}`,
+	};
+
 	return (
-		<>
-			<div className="flex flex-col items-start gap-4 my-12">
-				<h1 className="text-2xl md:text-4xl font-bold">{metadata.title}</h1>
-				<div className="flex text-lg items-center gap-2 text-neutral-500">
-					<p>{metadata.author}</p>
-					<Dot size={16} />
-					<p>{format(metadata.pubDate, "MMMM d, yyyy")}</p>
+		<div className="rise">
+			<Link
+				href="/#writing"
+				className="-my-1 inline-flex items-center gap-1.5 py-1 text-[0.9rem] italic text-muted transition-colors hover:text-ink"
+			>
+				<ArrowLeft size={14} aria-hidden="true" />
+				Writing
+			</Link>
+
+			<header className="mt-8 mb-10 flex flex-col items-start gap-4">
+				<h1 className="text-3xl font-normal leading-tight tracking-[-0.01em] text-ink md:text-[2.6rem]">
+					{metadata.title}
+				</h1>
+				<div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-faint">
+					<time dateTime={new Date(metadata.pubDate).toISOString()}>
+						{format(metadata.pubDate, "MMMM d, yyyy")}
+					</time>
+					<span aria-hidden="true" className="text-border-strong">
+						·
+					</span>
+					<span>{minutes} min read</span>
+					{metadata.draft && (
+						<>
+							<span aria-hidden="true" className="text-border-strong">
+								·
+							</span>
+							<span>Draft</span>
+						</>
+					)}
 				</div>
-			</div>
+			</header>
+
 			<Article>
 				<Image
 					src={`/assets/${metadata.slug}/banner.webp`}
-					width={512}
-					height={512}
+					width={1024}
+					height={576}
+					priority
 					alt={`Banner for ${metadata.title}`}
-					className="w-full h-auto object-cover rounded"
+					className="h-auto w-full border border-border object-cover"
 				/>
 				<Markdown
 					remarkPlugins={[remarkGfm]}
@@ -70,12 +156,29 @@ export default async function Blog({
 					components={{
 						img: CustomImage,
 						pre: CustomPre,
+						table: CustomTable,
 					}}
 				>
 					{content}
 				</Markdown>
 			</Article>
-		</>
+
+			<div className="mt-14 border-t border-border pt-6">
+				<Link
+					href="/#writing"
+					className="-my-1 inline-flex items-center gap-1.5 py-1 text-[0.95rem] italic underline decoration-border-strong decoration-1 underline-offset-4 transition-colors hover:decoration-ink"
+				>
+					<ArrowLeft size={14} aria-hidden="true" />
+					All writing
+				</Link>
+			</div>
+
+			<script
+				type="application/ld+json"
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: static, non-user JSON-LD
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+			/>
+		</div>
 	);
 }
 

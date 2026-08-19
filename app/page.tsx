@@ -1,23 +1,23 @@
-import Achievements from "@/components/Achievements";
-import Blogs from "@/components/Blogs";
-import Education from "@/components/Education";
-import Experience from "@/components/Experience";
-import Introduction from "@/components/Introduction";
-import LandingBanner from "@/components/LandingBanner";
-import Projects from "@/components/Projects";
-import Skills from "@/components/Skills";
+import Experience from "@/components/home/Experience";
+import Experiments from "@/components/home/Experiments";
+import FeaturedWork from "@/components/home/FeaturedWork";
+import Hero from "@/components/home/Hero";
+import Masthead from "@/components/home/Masthead";
+import Skills from "@/components/home/Skills";
+import Writing from "@/components/home/Writing";
 
 export default function Home() {
 	return (
 		<>
-			<LandingBanner />
-			<Introduction />
-			<Experience />
-			<Projects />
-			<Skills />
-			<Education />
-			<Achievements />
-			<Blogs />
+			<Hero />
+			<Masthead />
+			<div className="mt-20 space-y-24 md:mt-28 md:space-y-32">
+				<FeaturedWork />
+				<Experience />
+				<Skills />
+				<Writing />
+				<Experiments />
+			</div>
 		</>
 	);
 }
