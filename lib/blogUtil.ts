@@ -75,34 +75,22 @@ export function getAllBlogsWithMetadata(): Array<
 		.filter(Boolean) as Array<BlogMetadata & { slug: string }>;
 }
 
-// Function to fetch slugs of every blog
+/**
+ * Slugs that should get a route. Derived from getPublishedBlogs so a post
+ * marked `draft: true` is genuinely unpublished — it stays browsable in
+ * development and is left out of the production build entirely.
+ */
 export function getAllBlogsSlug(): Array<{ slug: string }> {
-	const blogsDir = path.join(process.cwd(), "blogs");
-
-	if (!fs.existsSync(blogsDir)) {
-		console.warn("Blogs directory not found:", blogsDir);
-		return [];
-	}
-
-	const files = fs
-		.readdirSync(blogsDir)
-		.filter((file) => file.endsWith(".mdx"));
-
-	return files.map((file) => {
-		const slug = file.replace(".mdx", "");
-		return { slug };
-	});
+	return getPublishedBlogs().map(({ slug }) => ({ slug }));
 }
 
 // Method 4: Get published blogs only
 export function getPublishedBlogs(): Array<BlogMetadata & { slug: string }> {
 	const isAtDev = process.env.NODE_ENV === "development";
 
-	return (
-		getAllBlogsWithMetadata()
-			.filter((blog) => isAtDev || !blog.draft)
-			.sort(
-				(a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime(),
-			)
-	);
+	return getAllBlogsWithMetadata()
+		.filter((blog) => isAtDev || !blog.draft)
+		.sort(
+			(a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime(),
+		);
 }

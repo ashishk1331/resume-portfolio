@@ -182,6 +182,10 @@ export default async function Blog({ params }: Params) {
 	);
 }
 
+/** Any slug not returned by generateStaticParams 404s rather than being
+ *  rendered on demand — this is what keeps drafts off the live site. */
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
 	return getAllBlogsSlug();
 }
