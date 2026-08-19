@@ -2,7 +2,7 @@ import { site } from "@/constants/site";
 
 export default function Hero() {
 	return (
-		<header className="rise">
+		<header className="rise mt-10 mb-20 sm:mt-16 sm:mb-24 md:mt-24 md:mb-36">
 			{/* The bio line is the h1 — it is the first and largest thing on the
 			    page, so the document outline should say so. */}
 			<h1 className="text-[clamp(1.65rem,3.6vw,2.85rem)] font-normal leading-[1.2] tracking-[-0.01em] text-ink">
