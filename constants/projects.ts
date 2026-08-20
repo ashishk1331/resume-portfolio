@@ -222,6 +222,44 @@ export const experiments: Project[] = [
 		links: [{ label: "usevoodoohq.com", href: "https://usevoodoohq.com" }],
 	},
 	{
+		slug: "lc-company-questions",
+		title: "LC Company Questions",
+		category: "Interview prep checklist",
+		summary:
+			"LeetCode problems indexed by the company that asked them, browsable A–Z and tickable as a checklist — progress is kept in the browser between visits.",
+		highlights: [],
+		stack: ["TypeScript", "Next.js", "Zustand", "Tailwind"],
+		links: [
+			{
+				label: "lc-question-company.vercel.app",
+				href: "https://lc-question-company.vercel.app/",
+			},
+			{
+				label: "GitHub",
+				href: "https://github.com/ashishk1331/lc-question-company",
+			},
+		],
+	},
+	{
+		slug: "contest-planner",
+		title: "Contest Planner",
+		category: "Competitive programming calendar",
+		summary:
+			"A month view of contests across LeetCode, Codeforces, CodeChef and GeeksforGeeks, with per-day counts, run times and a live countdown to each start.",
+		highlights: [],
+		stack: ["TypeScript", "React", "Vite", "Tailwind", "date-fns"],
+		links: [
+			{
+				label: "contest-planner.vercel.app",
+				href: "https://contest-planner.vercel.app/",
+			},
+			{
+				label: "GitHub",
+				href: "https://github.com/ashishk1331/Contest-Planner",
+			},
+		],
+	},
+	{
 		slug: "wingman",
 		title: "Wingman",
 		category: "On-device VLMs for Android",

@@ -37,6 +37,23 @@ export default function Experiments() {
 								{project.summary}
 							</p>
 							<TechList items={project.stack} className="mt-2.5" />
+							{project.links.length > 1 && (
+								<ul className="mt-2 flex flex-wrap gap-x-4">
+									{project.links.slice(1).map(({ label, href }) => (
+										<li key={href}>
+											<a
+												href={href}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="-my-1 inline-flex items-center gap-1 py-1 text-[0.9rem] italic text-muted underline decoration-border-strong decoration-1 underline-offset-4 transition-colors hover:text-ink hover:decoration-ink"
+											>
+												{label}
+												<ArrowUpRight size={13} aria-hidden="true" />
+											</a>
+										</li>
+									))}
+								</ul>
+							)}
 						</li>
 					);
 				})}
