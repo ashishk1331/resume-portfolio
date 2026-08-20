@@ -302,6 +302,22 @@ export const experiments: Project[] = [
 		],
 	},
 	{
+		slug: "anubhuti-2k24",
+		title: "Anubhuti 2K24",
+		category: "Event platform & admin portal",
+		summary:
+			"The public site for a college cultural fest and the portal that ran it — event CRUD, registrations, transactions, QR passes and spreadsheet exports, on Appwrite.",
+		highlights: [],
+		stack: ["JavaScript", "Next.js", "Appwrite", "Zustand", "Formik"],
+		links: [
+			{
+				label: "anubhuti-2-k24.vercel.app",
+				href: "https://anubhuti-2-k24.vercel.app/",
+			},
+			{ label: "GitHub", href: "https://github.com/ashishk1331/Anubhuti-2K24" },
+		],
+	},
+	{
 		slug: "folder-routing",
 		title: "folder-routing",
 		category: "Express routing library",
