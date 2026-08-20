@@ -216,10 +216,86 @@ export const experiments: Project[] = [
 		title: "Voodoo",
 		category: "AI search & agent platform",
 		summary:
-			"An AI search and agent platform built on diffusion LLMs, with parallel generation, multi-source search and agentic workflows.",
+			"An AI search product built on diffusion LLMs, where responses are generated in parallel rather than a token at a time, across multi-source search and agentic workflows.",
 		highlights: [],
 		stack: ["TypeScript", "Next.js", "AI SDK", "Convex"],
 		links: [{ label: "usevoodoohq.com", href: "https://usevoodoohq.com" }],
+	},
+	{
+		slug: "anubhuti-2k24",
+		title: "Anubhuti 2K24",
+		category: "Event platform & admin portal",
+		summary:
+			"The public site for a college cultural fest and the portal that ran it — event CRUD, registrations, transactions, QR passes and spreadsheet exports, on Appwrite.",
+		highlights: [],
+		stack: ["JavaScript", "Next.js", "Appwrite", "Zustand", "Formik"],
+		links: [
+			{
+				label: "anubhuti-2-k24.vercel.app",
+				href: "https://anubhuti-2-k24.vercel.app/",
+			},
+			{ label: "GitHub", href: "https://github.com/ashishk1331/Anubhuti-2K24" },
+		],
+	},
+	{
+		slug: "wingman",
+		title: "Wingman",
+		category: "VLMs from your phone",
+		summary:
+			"An Expo app that sends what the camera sees to a vision-language model and streams the answer back over SSE, served by a FastAPI process running a Transformers VLM.",
+		highlights: [],
+		stack: ["TypeScript", "Expo", "React Native", "FastAPI", "PyTorch"],
+		links: [
+			{ label: "GitHub", href: "https://github.com/ashishk1331/wingman" },
+			{
+				label: "Inference server",
+				href: "https://github.com/ashishk1331/smolnlm-android",
+			},
+		],
+	},
+	{
+		slug: "tetrapack",
+		title: "Tetrapack",
+		category: "Notion-style block parser",
+		summary:
+			"A JavaScript parser that renders Notion-style blocks in isolation, bundled with esbuild, documented in Storybook and shipped with its own docs site.",
+		highlights: [],
+		stack: ["JavaScript", "esbuild", "Storybook"],
+		links: [
+			{
+				label: "tetra-docs.vercel.app",
+				href: "https://tetra-docs.vercel.app/",
+			},
+			{ label: "GitHub", href: "https://github.com/ashishk1331/tetrapack" },
+		],
+	},
+	{
+		slug: "altar",
+		title: "Altar",
+		category: "Microblogging app",
+		summary:
+			"A microblogging app with real-time updates, user profiles and bookmarks, including a designed invite system.",
+		highlights: [],
+		stack: ["TypeScript", "Next.js", "Convex"],
+		links: [
+			{ label: "thealtar.vercel.app", href: "https://thealtar.vercel.app/" },
+			{ label: "GitHub", href: "https://github.com/ashishk1331/altar" },
+		],
+	},
+	{
+		slug: "folder-routing",
+		title: "folder-routing",
+		category: "Express routing library",
+		summary:
+			"A small Express wrapper that maps a directory tree to routes, Next.js style, with async middleware support.",
+		highlights: [],
+		stack: ["JavaScript", "Express"],
+		links: [
+			{
+				label: "GitHub",
+				href: "https://github.com/ashishk1331/folder-routing",
+			},
+		],
 	},
 	{
 		slug: "lc-company-questions",
@@ -260,33 +336,6 @@ export const experiments: Project[] = [
 		],
 	},
 	{
-		slug: "wingman",
-		title: "Wingman",
-		category: "On-device VLMs for Android",
-		summary:
-			"A mobile app that runs vision-language models locally on-device, backed by llama.cpp and a FastAPI service.",
-		highlights: [],
-		stack: ["React Native", "FastAPI", "llama.cpp"],
-		links: [
-			{
-				label: "GitHub",
-				href: "https://github.com/ashishk1331/smolnlm-android",
-			},
-		],
-	},
-	{
-		slug: "altar",
-		title: "Altar",
-		category: "Microblogging app",
-		summary:
-			"A microblogging app with real-time updates, user profiles and bookmarks, including a designed invite system.",
-		highlights: [],
-		stack: ["TypeScript", "Next.js", "Convex"],
-		links: [
-			{ label: "thealtar.vercel.app", href: "https://thealtar.vercel.app/" },
-		],
-	},
-	{
 		slug: "commit",
 		title: "Commit",
 		category: "Daily task tracker",
@@ -299,52 +348,20 @@ export const experiments: Project[] = [
 				label: "commit-neon.vercel.app",
 				href: "https://commit-neon.vercel.app/",
 			},
+			{ label: "GitHub", href: "https://github.com/ashishk1331/Commit" },
 		],
 	},
 	{
-		slug: "anubhuti-2k24",
-		title: "Anubhuti 2K24",
-		category: "Event platform & admin portal",
+		slug: "go-north",
+		title: "Go North",
+		category: "Design studio",
 		summary:
-			"The public site for a college cultural fest and the portal that ran it — event CRUD, registrations, transactions, QR passes and spreadsheet exports, on Appwrite.",
+			"A two-person studio taking on sites for small businesses, alongside a small library of Next.js and TypeScript templates to start projects from. It built the Anubhuti site above.",
 		highlights: [],
-		stack: ["JavaScript", "Next.js", "Appwrite", "Zustand", "Formik"],
+		stack: ["JavaScript", "Next.js"],
 		links: [
-			{
-				label: "anubhuti-2-k24.vercel.app",
-				href: "https://anubhuti-2-k24.vercel.app/",
-			},
-			{ label: "GitHub", href: "https://github.com/ashishk1331/Anubhuti-2K24" },
-		],
-	},
-	{
-		slug: "folder-routing",
-		title: "folder-routing",
-		category: "Express routing library",
-		summary:
-			"A small Express wrapper that maps a directory tree to routes, Next.js style, with async middleware support.",
-		highlights: [],
-		stack: ["JavaScript", "Express"],
-		links: [
-			{
-				label: "GitHub",
-				href: "https://github.com/ashishk1331/folder-routing",
-			},
-		],
-	},
-	{
-		slug: "tetrapack",
-		title: "Tetrapack",
-		category: "Notion-style block parser",
-		summary:
-			"A JavaScript parser that renders Notion-style blocks in isolation, bundled with esbuild and documented in Storybook.",
-		highlights: [],
-		stack: ["JavaScript", "esbuild", "Storybook"],
-		links: [
-			{
-				label: "tetra-docs.vercel.app",
-				href: "https://tetra-docs.vercel.app/",
-			},
+			{ label: "go-north.vercel.app", href: "https://go-north.vercel.app/" },
+			{ label: "GitHub", href: "https://github.com/ashishk1331/Go-North" },
 		],
 	},
 	{
